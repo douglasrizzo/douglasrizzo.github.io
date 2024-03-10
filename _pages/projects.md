@@ -5,7 +5,7 @@ permalink: /projects/
 description: A growing collection of my cool projects.
 nav: true
 nav_order: 3
-display_categories: [object detection, computerized adaptive testing, latex, c++]
+display_categories: [computer vision, computerized adaptive testing, latex, c++]
 horizontal: false
 ---
 

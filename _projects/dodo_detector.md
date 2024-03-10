@@ -3,8 +3,8 @@ layout: page
 title: dodo detector
 description: Object detection for robotics with Python and ROS
 # img: assets/img/12.jpg
-importance: 1
-category: object detection
+importance: 2
+category: computer vision
 related_publications: true
 ---
 
