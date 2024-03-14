@@ -3,7 +3,7 @@ layout: page
 title: fruit detection showcase
 description: training convolutional neural networks do detect oranges
 # img: assets/img/12.jpg
-importance: 1
+importance: 2
 category: computer vision
 related_publications: false
 ---

@@ -3,7 +3,7 @@ layout: page
 title: generating faces using gans
 description: training convolutional neural networks do generate faces
 # img: assets/img/12.jpg
-importance: 1
+importance: 3
 category: computer vision
 related_publications: false
 ---
