@@ -5,7 +5,7 @@ description: automatic monitoring of citrus orchards using computer vision
 # img: assets/img/12.jpg
 importance: 1
 category: computer vision
-related_publications: true
+related_publications: false
 ---
 
 During my stay at Adroit Robotics, I:
