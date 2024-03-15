@@ -5,7 +5,7 @@ description: ML, linear algebra and numerical analysis algorithms in C++
 importance: 1
 tags: open-source cpp math
 category: c++
-related_publications: true
+related_publications: false
 ---
 
 These were implemented in C++:

@@ -6,7 +6,7 @@ description: training convolutional neural networks do generate faces
 importance: 3
 tags: convnets gans wandb pytorch
 category: computer vision
-related_publications: true
+related_publications: false
 ---
 
 You can see the report below in full screen by following [this link](https://wandb.ai/tetamusha/wgan_celeba/reports/GAN-training-on-image-datasets--Vmlldzo2NzMxODkx).
