@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Open source contributions during my PhD
+tags: open-source
 categories: open-source
 ---
 
@@ -49,14 +50,14 @@ This is a list I try to keep updated of the contributions I made to open source 
 
 ### C++ libraries with documentation
 
-**Repository** | **Code** | **Docs**
--------:|:-------:|:-------:
-machine_learning | [Code](https://github.com/douglasrizzo/machine_learning) | [Docs](https://douglasrizzo.github.io/machine_learning/)
-matrix | [Code](https://github.com/douglasrizzo/matrix) | [Docs](https://douglasrizzo.github.io/matrix/)
-csv_reader | [Code](https://github.com/douglasrizzo/csv_reader) | ---  
-numerical_analysis | [Code](https://github.com/douglasrizzo/numerical_analysis) | [Docs](https://douglasrizzo.github.io/numerical_analysis/)
-search | [Code](https://github.com/douglasrizzo/search) | [Docs](https://douglasrizzo.github.io/search/)
-data_structures | [Code](https://github.com/douglasrizzo/data_structures) | [Docs](https://douglasrizzo.github.io/data_structures)
+|     **Repository** |                          **Code**                          |                          **Docs**                          |
+| -----------------: | :--------------------------------------------------------: | :--------------------------------------------------------: |
+|   machine_learning |  [Code](https://github.com/douglasrizzo/machine_learning)  |  [Docs](https://douglasrizzo.github.io/machine_learning/)  |
+|             matrix |       [Code](https://github.com/douglasrizzo/matrix)       |       [Docs](https://douglasrizzo.github.io/matrix/)       |
+|         csv_reader |     [Code](https://github.com/douglasrizzo/csv_reader)     |                            ---                             |
+| numerical_analysis | [Code](https://github.com/douglasrizzo/numerical_analysis) | [Docs](https://douglasrizzo.github.io/numerical_analysis/) |
+|             search |       [Code](https://github.com/douglasrizzo/search)       |       [Docs](https://douglasrizzo.github.io/search/)       |
+|    data_structures |  [Code](https://github.com/douglasrizzo/data_structures)   |   [Docs](https://douglasrizzo.github.io/data_structures)   |
 
 ### StarCraft Multi-Agent Challenge (SMAC)
 

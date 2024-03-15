@@ -1,7 +1,8 @@
 ---
 layout: post
 title: In C++, classes and structs are the same thing
-categories: cpp programming
+tags: cpp programming
+categories: coding
 ---
 
 **Disclaimer:** I am by no means a C or C++ expert. I have never programmed in C++ professionally, only academically. You can view my C++ work [here](https://github.com/douglasrizzo?tab=repositories&language=c%2B%2B). My reference book for C++ is [Deitel](https://www.amazon.com/How-Program-10th-Paul-Deitel/dp/0134448235). A good playlist to learn C++ is [The Cherno's](https://www.youtube.com/playlist?list=PLlrATfBNZ98dudnM48yfGUldqGD0S4FFb). Examples were expanded from The Cherno's [YouTube video](https://www.youtube.com/watch?v=fLgTtaqqJp0). Code is available [on GitHub](https://gist.github.com/douglasrizzo/b1375881d1afb70cd1fe76fefa47d3f0).
@@ -12,11 +13,11 @@ categories: cpp programming
 
 - [Introduction](#introduction)
 - [A versatile entry point (`main.cpp`)](#a-versatile-entry-point-maincpp)
-- [class_class.hpp](#class_classhpp)
-- [struct_struct.hpp](#struct_structhpp)
+- [class\_class.hpp](#class_classhpp)
+- [struct\_struct.hpp](#struct_structhpp)
 - [The inbred brethren](#the-inbred-brethren)
-    - [struct_class.hpp](#struct_classhpp)
-    - [class_struct.hpp](#class_structhpp)
+  - [struct\_class.hpp](#struct_classhpp)
+  - [class\_struct.hpp](#class_structhpp)
 - [Access modifiers in structs (`struct_access_mod.cpp`)](#access-modifiers-in-structs-struct_access_modcpp)
 - [What a valid C struct looks like (`c_struct.c`)](#what-a-valid-c-struct-looks-like-c_structc)
 - [Conclusion](#conclusion)

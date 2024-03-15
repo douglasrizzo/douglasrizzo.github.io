@@ -1,7 +1,8 @@
 ---
 layout: post
 title: Dunn index for clusters analysis
-categories: python clustering programming
+tags: python clustering programming
+categories: machine-learning
 ---
 
 This is a Python implementation of the Dunn index, which is used to evaluate clustering results. While, officially, I followed the reference below, unnoficially, [Wikipedia](https://en.wikipedia.org/wiki/Dunn_index) was a lot more helpful in this endeavour.

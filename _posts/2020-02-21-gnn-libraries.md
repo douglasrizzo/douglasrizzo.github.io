@@ -1,7 +1,8 @@
 ---
 layout: post
 title: Graph neural network libraries
-categories: awesome-list graphs deep-learning programming
+tags: awesome-list graphs deep-learning programming
+categories: machine-learning tools
 ---
 
 Recently, I have taken an interest in graph neural networks. These are the libraries I found online to work with different types of GNN, in no particular order:

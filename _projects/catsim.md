@@ -4,7 +4,9 @@ title: catsim
 description: computerized adaptive testing simulation in Python
 img: https://douglasrizzo.com.br/catsim/_static/logo.svg
 importance: 1
+tags: cat irt open-source python software-dev
 category: computerized adaptive testing
+related_publications: true
 ---
 
 <center>

@@ -1,7 +1,8 @@
 ---
 layout: post
 title: Zotero tips and tricks
-categories: zotero tutorial
+tags: zotero tutorial
+categories: tools
 ---
 
 **tl;dr:** [**Zotero**][zotero] is great but it lacks good cloud sync support and a way to make a giant .bib file available for referencing. You can get the first with the [**Zotfile**][zotfile] addon, pointing its PDF directory somewhere inside your cloud sync directory. You can get the second with the [**Better BibTeX**][better-bibtex] addon, by exporting a `.bib` file which is always kept updated.

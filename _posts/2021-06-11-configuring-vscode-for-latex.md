@@ -1,7 +1,8 @@
 ---
 layout: post
 title: Configuring Visual Studio Code for LaTeX
-categories: vscode tutorial
+tags: vscode tutorial
+categories: tools
 ---
 
 [VS Code](https://code.visualstudio.com/) has very poor LaTeX support out-of-the-box. Here I list useful extensions and other software that will transform VS Code into a much more power LaTeX editor. They also do not conflict with each other, which is great.

@@ -1,7 +1,8 @@
 ---
 layout: post
 title: Running a Gemma-powered question-answering chatbot locally with LangChain + Ollama
-categories: llms python langchain ollama google-gemma mistral
+tags: llms python langchain ollama google-gemma mistral
+categories: nlp
 ---
 
 Last week, I started my quest to build my first LLM-powered chatbot that runs locally and executes RAG on my [Obsidian](https://obsidian.md/) document base. You can see it [here]({% post_url 2024-02-19-llm-qa-obsidian-rag %}).

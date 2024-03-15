@@ -1,7 +1,8 @@
 ---
 layout: post
 title: Solving the mistery of the KL divergence
-categories: colab python machine-learning pytorch programming
+tags: colab python machine-learning pytorch programming
+categories: machine-learning
 ---
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1f2NnBBRUjrZYLdJC9-MPn1TqXdxW-s2e?usp=sharing)

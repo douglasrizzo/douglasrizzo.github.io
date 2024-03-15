@@ -1,7 +1,8 @@
 ---
 layout: post
 title: Como acessar a VPN da FEI no Linux usando o openfortivpn
-categories: tutorial português linux
+tags: tutorial portuguese linux
+categories: tools
 ---
 
 O processo para acessar a VPN da [FEI](https://fei.edu.br/) no Linux envolve o uso de um programa chamado FortiClient SSLVPN. Esse programa não é atualizado desde 2016. Os usuários de Linux têm a opção de usar o [*openfortivpn*](https://github.com/adrienverge/openfortivpn), um programa de código aberto que ainda é mantido regularmente. Este tutorial ensina como utilizá-lo.

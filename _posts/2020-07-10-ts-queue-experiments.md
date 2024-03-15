@@ -1,7 +1,8 @@
 ---
 layout: post
 title: Using task-spooler to queue experiments on Linux
-categories: linux deep-learning tutorial
+tags: linux deep-learning tutorial
+categories: tools
 ---
 
 In this post, I'll introduce you to [task-spooler](http://viric.name/soft/ts/) (“ts” for short), a Linux program that lets you queue tasks to be executed either sequentially or in parallel, according to a user-defined number of slots.
@@ -12,6 +13,10 @@ In this post, I'll introduce you to [task-spooler](http://viric.name/soft/ts/) (
 - [A crude solution](#a-crude-solution)
 - [The downsides](#the-downsides)
 - [Enter ts](#enter-ts)
+  - [Adding more slots to the ts queue](#adding-more-slots-to-the-ts-queue)
+  - [Adding more demaning tasks to the queue](#adding-more-demaning-tasks-to-the-queue)
+  - [Monitoring tasks](#monitoring-tasks)
+  - [Miscellaneous functionalities](#miscellaneous-functionalities)
 - [Installing ts](#installing-ts)
 - [Closing remarks](#closing-remarks)
 

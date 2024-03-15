@@ -1,7 +1,8 @@
 ---
 layout: post
 title: What's The Longest Word You Can Write With Seven-Segment Displays?
-categories: colab python programming
+tags: colab python programming
+categories: coding
 ---
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/18oyF5AFuczMbckpP5WRqMTCzO8qTO0Cn?usp=sharing)

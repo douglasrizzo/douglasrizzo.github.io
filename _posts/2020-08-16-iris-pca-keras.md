@@ -1,7 +1,8 @@
 ---
 layout: post
 title: Classificação da base de dados Iris utilizando redes neurais e PCA
-categories: colab portugues keras neural-networks python classification tutorial pca
+tags: colab portugues keras neural-networks python classification tutorial pca
+categories: machine-learning
 ---
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/15vsVfH-qlJP2YBCdgS8V8uc8jjkRYCFs?usp=sharing)

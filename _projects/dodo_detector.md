@@ -5,6 +5,7 @@ description: Object detection for robotics with Python and ROS
 # img: assets/img/12.jpg
 importance: 1
 category: computer vision
+tags: convnets open-source object-detection tensorflow ros
 related_publications: true
 ---
 

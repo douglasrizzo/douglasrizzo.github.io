@@ -1,7 +1,8 @@
 ---
 layout: post
 title: Installing CUDA 10.1 and cuDNN 7.6 on Manjaro Linux
-categories: linux nvidia deep-learning
+tags: linux nvidia deep-learning
+categories: tools
 ---
 
 <!-- TOC -->

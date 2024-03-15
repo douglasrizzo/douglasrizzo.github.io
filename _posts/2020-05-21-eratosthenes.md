@@ -1,7 +1,8 @@
 ---
 layout: post
 title: Sieve of Eratosthenes
-categories: colab python programming mathematics
+tags: colab python programming mathematics
+categories: coding
 ---
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1F8L9vW8PCrZCpzaKnIgcMM2MBhHJRXuU?usp=sharing)

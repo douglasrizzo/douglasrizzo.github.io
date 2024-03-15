@@ -1,7 +1,8 @@
 ---
 layout: post
 title: Reverse engineering a step decay for learning rate
-categories: deep-learning pytorch tutorial programming
+tools: deep-learning pytorch tutorial programming
+categories: machine-learning
 ---
 
 <!-- TOC -->

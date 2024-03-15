@@ -1,7 +1,8 @@
 ---
 layout: post
 title: Visualizing temperature in a Boltzmann policy
-categories: python reinforcement-learning pytorch programming
+tags: python reinforcement-learning pytorch programming
+categories: reinforcement-learning
 ---
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/18PTAJNhem2zwJUZVuktaKkcjmfskET4_?usp=sharing)

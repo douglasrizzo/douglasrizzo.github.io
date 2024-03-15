@@ -1,7 +1,8 @@
 ---
 layout: post
 title: Resources to self-study mathematics for machine learning
-categories: mathematics self-study machine-learning
+tags: mathematics self-study
+categories: study-guide
 ---
 
 > Two plus two is four, minus one, that's three. Quick maths.

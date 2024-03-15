@@ -1,7 +1,8 @@
 ---
 layout: post
 title: Classificação da base de dados Iris - redes menores e regularização
-categories: colab portugues keras neural-networks python classification tutorial
+tags: colab portugues keras neural-networks python classification tutorial
+categories: machine-learning
 ---
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1kOaj4ogt13P0XlaoZ0wqezgEP9KCB8bf?usp=sharing)

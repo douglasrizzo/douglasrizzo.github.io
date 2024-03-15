@@ -4,7 +4,9 @@ title: jCAT
 description: Java Web application for computerized adaptive testing application in tablets
 img: assets/img/jcat-item.png
 importance: 3
+tags: cat irt java software-dev
 category: computerized adaptive testing
+related_publications: true
 ---
 
 A Java EE web application whose purpose is to apply both an electronic version and a computerized adaptive test of [Provinha Brasil](http://provinhabrasil.inep.gov.br/provinhabrasil/), a nation-wide educational evaluation for Brazilian students in the second year of basic school.

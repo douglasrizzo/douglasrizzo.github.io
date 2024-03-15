@@ -1,7 +1,8 @@
 ---
 layout: post
 title: Classificação da base de dados Iris utilizando um perceptron multi-camadas em Keras
-categories: colab portugues keras neural-networks python classification tutorial
+tags: colab portugues keras neural-networks python classification tutorial
+categories: machine-learning
 ---
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/13r1TY_BF1AXOMH8ufDEct3E8g243sONM?usp=sharing)
