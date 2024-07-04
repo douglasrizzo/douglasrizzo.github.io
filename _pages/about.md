@@ -18,15 +18,11 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
 ---
 
-AI specialist with a history in software engineering.
+I am an AI specialist with a background in software engineering, working with [natural language processing](https://link.springer.com/article/10.1007/s42979-022-01322-7), [large language models](blog/tag/llms/), [computer vision](projects/#computer vision) and [reinforcement learning](https://arxiv.org/abs/2012.07617).
 
-I am currently an AI Research Specialist at Samsung. Previously, I worked at [Adroit Robotics](projects/adroit), automating the monitoring of citrus orchards using computer vision techniques.
+I worked as an AI Research Specialist at Samsung, specializing in digital health solutions for wearable devices. I also automated citrus orchard monitoring at Adroit Robotics using [computer vision techniques](https://wandb.ai/tetamusha/fruit_detection_torchvision/reports/Detecting-oranges-with-TorchVision--Vmlldzo4MDAyNzM). My PhD, funded by CAPES, centered on [cooperative multi-agent reinforcement learning](https://arxiv.org/abs/2012.07617) using graph neural networks.
 
-During my PhD, which I finished with a full scholarship by CAPES, I worked in the field of cooperative multi-agent reinforcement learnings. My research focused on the problem of fully cooperative multi-agent deep reinforcement learning with heterogeneous agents.
-
-I was active for many years in robotics competitions (LARC and RoboCup) in the @Home and Humanoid Soccer categories, in which I focused in developing [object detection systems for the robots](projects/dodo_detector).
-
-I've also done professional work as a consultant and have publications in the area of educational assessment and [computerized adaptive tests](projects#computerized-adaptive-testing).
+I have extensive experience in robotics competitions, in which I focused in developing [object detection systems for the robots](projects/dodo_detector). I've also done professional work as a consultant and have publications in the area of educational assessment and [computerized adaptive tests](projects#computerized adaptive testing).
 
 ### Would you like to know more?
 
