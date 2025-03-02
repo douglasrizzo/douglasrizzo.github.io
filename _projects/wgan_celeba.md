@@ -7,6 +7,7 @@ importance: 3
 tags: convnets gans wandb pytorch
 category: computer vision
 related_publications: false
+redirect: https://wandb.ai/tetamusha/wgan_celeba/reports/GAN-training-on-image-datasets--Vmlldzo2NzMxODkx
 ---
 
 You can see the report below in full screen by following [this link](https://wandb.ai/tetamusha/wgan_celeba/reports/GAN-training-on-image-datasets--Vmlldzo2NzMxODkx).

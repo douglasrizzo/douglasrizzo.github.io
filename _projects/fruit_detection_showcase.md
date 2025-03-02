@@ -7,6 +7,7 @@ importance: 2
 tags: convnets object-detection pytorch wandb
 category: computer vision
 related_publications: false
+redirect: https://wandb.ai/tetamusha/fruit_detection_torchvision/reports/Detecting-oranges-with-TorchVision--Vmlldzo4MDAyNzM
 ---
 
 You can see the report below in full screen by following [this link](https://wandb.ai/tetamusha/fruit_detection_torchvision/reports/Detecting-oranges-with-TorchVision--Vmlldzo4MDAyNzM).
