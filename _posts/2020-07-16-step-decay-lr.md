@@ -3,18 +3,9 @@ layout: post
 title: Reverse engineering a step decay for learning rate
 tools: deep-learning pytorch tutorial programming
 categories: machine-learning
+toc:
+  sidebar: left
 ---
-
-<!-- TOC -->
-
-- [The theory behind the problem](#the-theory-behind-the-problem)
-- [Problem setting](#problem-setting)
-- [Finding the unknowns](#finding-the-unknowns)
-- [A concrete example](#a-concrete-example)
-- [A PyTorch example](#a-pytorch-example)
-- [Closing remarks](#closing-remarks)
-
-<!-- /TOC -->
 
 ## The theory behind the problem
 

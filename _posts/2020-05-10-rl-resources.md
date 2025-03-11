@@ -3,20 +3,15 @@ layout: post
 title: Free online resources to study reinforcement learning and deep RL
 tags: awesome-list reinforcement-learning deep-reinforcement-learning self-study
 categories: study-guide
+toc:
+  sidebar: left
 ---
+
+## Introduction
 
 Over the last few years and months, I gathered some material that I used to study reinforcement learning and deep reinforcement learning, mostly by myself, as part of my PhD formation.
 
 I hope these links can help others as much as they've helped me. The list also serves the purpose of remembering me that this material exists, since memory loss is a thing during a PhD.
-
-<!-- TOC -->
-
-- [Books and surveys](#books-and-surveys)
-- [Courses](#courses)
-- [Miscellaneous online material](#miscellaneous-online-material)
-- [Algorithm implementations](#algorithm-implementations)
-
-<!-- /TOC -->
 
 ## Books and surveys
 

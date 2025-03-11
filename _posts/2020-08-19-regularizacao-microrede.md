@@ -3,7 +3,11 @@ layout: post
 title: Classificação da base de dados Iris - redes menores e regularização
 tags: colab portugues keras neural-networks python classification tutorial
 categories: machine-learning
+toc:
+  sidebar: left
 ---
+
+## Introdução
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1kOaj4ogt13P0XlaoZ0wqezgEP9KCB8bf?usp=sharing)
 
@@ -18,7 +22,7 @@ Neste notebook, uma rede consideravelmente menor será treinada para classificar
 
 Além disso, treinaremos a rede neural original, utilizada nos notebooks anteriores, com regularização L2 e observaremos a ausência de *overfitting* quando a rede é treinada por longos períodos de tempo.
 
-# Importando pacotes e criando funções
+## Importando pacotes e criando funções
 
 As funções abaixo aplicam o PCA numa base de dados e avaliam uma rede neural, retornando as medidas para serem exibidas em gráficos posteriormente.
 
@@ -79,7 +83,7 @@ def evaluate_model(model, X, y):
   return v1, v2, v3, v4, v5, v6
 ```
 
-## Preparando os dados
+### Preparando os dados
 
 Usaremos o pacote *scikit-learn* para carregar a base de dados Iris. Vamos geraruma versão da base com o menor número possível de componentes principais (1).
 
@@ -93,7 +97,7 @@ iris_X_tiny = apply_PCA(iris_X, 1)
     Porcentagem da variância explicada por cada coluna: [0.92461872]
     Variância acumulada nas colunas remanescentes: 0.9246187232017271
 
-# Regularização
+## Regularização
 
 Em termos matemáticos, o *overfitting* ocorre quando os pesos de uma rede neural assumem magnitudes (positivas ou negativas) muito altas, permitindo que as funções que essas redes neurais modelam se tornem demasiadamente complexas para a função de erro que tentam minimizar.
 
@@ -322,6 +326,6 @@ O gráfico de erro no conjunto de validação (centro, direita) demonstra que o 
 
 Essa é uma característica interessante no mundo real, quando não sabemos exatamente a topologia exata da rede neural que solucionará nosso problema em questão, ou por quantas épocas de treinamento é necessário treinar o modelo.
 
-# Conclusão
+## Conclusão
 
 Este notebook demonstrou que uma rede neural consideravelmente menor que a utilizada até o momento é capaz de realizar a classificação das flores na base de dados Iris, utilizando 1/4 dos valores de entrada, 3/4 do número de camadas e aproximadamente 1/10 dos pesos treináveis.

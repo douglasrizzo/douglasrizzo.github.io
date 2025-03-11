@@ -3,7 +3,11 @@ layout: post
 title: Answering questions from an Obsidian database with LLMs + RAG
 tags: llms nlp python neural-networks
 categories: nlp
+toc:
+  sidebar: left
 ---
+
+## Introduction
 
 This notebook presents a proof-of-concept on how to create a question-answering bot powered by an LLM and with knowledge extracted from actual documents, more specifically, a collection of notes from Obsidian.
 

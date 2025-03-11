@@ -7,6 +7,8 @@ tags: sklearn python open-source recommendation-systems td-idf text-embeddings c
 mermaid:
   enabled: true
   zoomable: false
+toc:
+  sidebar: left
 ---
 
 ## Introduction

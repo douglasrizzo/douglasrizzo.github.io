@@ -3,22 +3,11 @@ layout: post
 title: Mapping Numpad keys with sxhkd
 tags: linux keyboards
 categories: tools
+toc:
+  sidebar: left
 ---
 
 In this tutorial, I explore how to map the Numpad keys to `sxhkd` in a Cooler Master Masterkeys Pro M ABNT2 keyboard.
-
-<!-- TOC -->
-
-- [About `sxhkd`](#about-sxhkd)
-- [About the keyboard](#about-the-keyboard)
-- [Getting keysims with `xev` when Num Lock is OFF...](#getting-keysims-with-xev-when-num-lock-is-off)
-- [... and when Num Lock is turned ON](#-and-when-num-lock-is-turned-on)
-- [Testing what works in `sxhkd`](#testing-what-works-in-sxhkd)
-  - [Num Lock OFF](#num-lock-off)
-  - [Num Lock ON](#num-lock-on)
-- [Final Notes](#final-notes)
-
-<!-- /TOC -->
 
 ## About `sxhkd`
 

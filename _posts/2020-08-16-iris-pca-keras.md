@@ -3,7 +3,11 @@ layout: post
 title: Classificação da base de dados Iris utilizando redes neurais e PCA
 tags: colab portugues keras neural-networks python classification tutorial pca
 categories: machine-learning
+toc:
+  sidebar: left
 ---
+
+## Introdução
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/15vsVfH-qlJP2YBCdgS8V8uc8jjkRYCFs?usp=sharing)
 
@@ -11,7 +15,7 @@ Este notebook exemplifica a redução de dimensionalidades de uma base de dados 
 
 Este notebook é uma continuação de um outro no qual a base de dados utilizada (Iris) e o método de treinamento e avaliação da rede neural já foram descritos. O notebook anterior está disponível [aqui](https://colab.research.google.com/drive/13r1TY_BF1AXOMH8ufDEct3E8g243sONM#scrollTo=MLs97GxwgNrs).
 
-# Importando pacotes e criando funções
+## Importando pacotes e criando funções
 
 Vamos utilizar scikit-learn e Keras. Também vamos criar algumas funções para simplificar o treinamento e avaliar de uma rede neural, que já foram descritos no notebook anterior.
 
@@ -84,7 +88,7 @@ def do_everything(X, y):
   print(confusion_matrix(y_test, y_pred_onehot))
 ```
 
-# Análise de componentes principais
+## Análise de componentes principais
 
 A análise de componentes principais (PCA, do inglês *principal component analysis*) é uma técnica matemática que detecta correlações nas colunas de uma matriz $$X$$ e realiza uma transformação linear em $$X$$ de forma a reduzir tais correlações.
 
@@ -101,7 +105,7 @@ Esta transformação pode ter como efeito colateral a concentração da informa�
 
 A redução de dimensionalidade de dados proveniente do PCA também é útil para fins de visualização de dados multidimensionais.
 
-## Preparando os dados
+### Preparando os dados
 
 Usaremos o pacote *scikit-learn* para carregar a base de dados Iris. Repare que ela possui 150 flores e 4 características por flor. No notebook anterior, utilizamos todas as 4 características para treinar nossa rede neural. Neste notebook, tentaremos realizar a mesma classificação com um menor número de características.
 
@@ -129,7 +133,7 @@ print(iris_X[:5])
      [4.6 3.1 1.5 0.2]
      [5.  3.6 1.4 0.2]]
 
-# Aplicando o PCA na base de dados Iris
+## Aplicando o PCA na base de dados Iris
 
 O PCA está implementado no *scikit-learn* e pode ser aplicado como no exemplo abaixo. Vamos criar uma função que aplica o PCA a um conjunto de dados, exibe informações de sua aplicação e retorna o conjuntos de dados transformados.
 
@@ -161,7 +165,7 @@ Perceba como nossa base dados ainda possui o mesmo número de características (
 
 O PCA costuma ordenar as colunas da nova base de dados em ordem decrescente de quantidade de informação, então, para garantir que estamos utilizando as colunas mais informativas de nossa base, basta ignorarmos as últimas colunas da matriz.
 
-# Aplicando o PCA para 3 componentes
+## Aplicando o PCA para 3 componentes
 
 Agora vamos aplicar o PCA e remover a coluna menos informativa. Isso tem o mesmo efeito de utilizar as 3 primeiras colunas da matriz gerada anteriormente, mas vamos aplicar o método de novo de qualquer forma.
 
@@ -222,7 +226,7 @@ do_everything(iris_X_3cp, iris_y)
 
 É possível observar que a rede neural é treinada com sucesso utilizando apenas as 3 características mais informativas provenientes do PCA. A rede ainda alcança altos valores de precisão, revocação e F1-score. Também é possível perceber que, assim como no notebook anterior, o *overfitting* ainda ocorre caso treinemos a rede neural por épocas demais. Isso, o PCA não resolve.
 
-# Aplicando o PCA para 2 componentes
+## Aplicando o PCA para 2 componentes
 
 Vamos reduzir nossa base de dados mais ainda, mantendo apenas 2 colunas.
 
@@ -283,7 +287,7 @@ Novamente, a rede neural ainda classifica os dados com sucesso, porém pode come
 
 Outra informação muito interessante de ser reparada é a redução no número de pesos treináveis da rede, exibido no resumo da rede neural no início da célula anterior (`Trainable params`). A rede neural treinada para classificar os dados originais (com 4 características) precisa aprender mais pesos (213) do que uma rede que classifica dados com menos características (2 características, 193 pesos). Isso significa que, ao utilizar o PCA, uma rede neural menor que processa menos dados pode potencialmente ter o mesmo desempenho que uma rede maior que processa mais dados.
 
-# E, finalmente...
+## E, finalmente...
 
 Vamos treinar a rede para classificar nossa flores **utilizando apenas 1 característica**. A base de dados mantém 92,4% da informação, a rede neural possui 10 pesos a menos e ainda alcança um desempenho satisfatório.
 
@@ -334,7 +338,7 @@ do_everything(iris_X_1cp, iris_y)
      [ 0  6  0]
      [ 0  3  8]]
 
-# Conclusão
+## Conclusão
 
 Este notebook explicou o PCA, uma técnica que transforma uma base de dados, representada por uma matriz, em uma nova matriz cujas colunas possuem menos correlação e maior concentração de informação em um menor número ce colunas.
 

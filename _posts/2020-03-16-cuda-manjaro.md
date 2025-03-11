@@ -3,20 +3,9 @@ layout: post
 title: Installing CUDA 10.1 and cuDNN 7.6 on Manjaro Linux
 tags: linux nvidia deep-learning
 categories: tools
+toc:
+  sidebar: left
 ---
-
-<!-- TOC -->
-
-- [Introduction](#introduction)
-- [Uninstall what was wrongfully installed](#uninstall-what-was-wrongfully-installed)
-- [Install/downgrade NVIDIA drivers](#installdowngrade-nvidia-drivers)
-  - [Restart computer and test drivers](#restart-computer-and-test-drivers)
-- [Install CUDA 10.1 and cuDNN 7.6](#install-cuda-101-and-cudnn-76)
-  - [CUDA](#cuda)
-  - [cuDNN](#cudnn)
-  - [Edit `.profile`](#edit-profile)
-
-<!-- /TOC -->
 
 ## Introduction
 

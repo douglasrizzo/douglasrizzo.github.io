@@ -3,27 +3,13 @@ layout: post
 title: Resources to self-study mathematics for machine learning
 tags: mathematics self-study
 categories: study-guide
+toc:
+  sidebar: left
 ---
 
 > Two plus two is four, minus one, that's three. Quick maths.
 >
 > [Michael Dapaah](https://youtu.be/3M_5oYU-IsU?t=63)
-
-<!-- TOC -->
-
-- [Introduction](#introduction)
-- [Study areas](#study-areas)
-  - [Algebra and pre-calculus](#algebra-and-pre-calculus)
-  - [Calculus](#calculus)
-  - [Linear Algebra](#linear-algebra)
-    - [Advanced Linear Algebra](#advanced-linear-algebra)
-- [Software and apps](#software-and-apps)
-- [Online communities](#online-communities)
-- [My failures](#my-failures)
-- [Final thoughts](#final-thoughts)
-- [More resources and moving forward](#more-resources-and-moving-forward)
-
-<!-- /TOC -->
 
 ## Introduction
 

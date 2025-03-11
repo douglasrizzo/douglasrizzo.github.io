@@ -3,24 +3,11 @@ layout: post
 title: Open source contributions during my PhD
 tags: open-source
 categories: open-source
+toc:
+  sidebar: left
 ---
 
 This is a list I try to keep updated of the contributions I made to open source software, all of them byproducts of the work I did for my PhD.
-
-<!-- TOC -->
-
-- [PyTorch Geometric](#pytorch-geometric)
-- [Richard Sutton's book Reinforcement Learning: an Introduction](#richard-suttons-book-reinforcement-learning-an-introduction)
-- [microRTS](#microrts)
-- [Half-Field Offense](#half-field-offense)
-- [python-microRTS](#python-microrts)
-- [Object detection packages](#object-detection-packages)
-- [C++ libraries with documentation](#c-libraries-with-documentation)
-- [StarCraft Multi-Agent Challenge (SMAC)](#starcraft-multi-agent-challenge-smac)
-- [FacebookResearch/ELF](#facebookresearchelf)
-- [DeepMind/pysc2](#deepmindpysc2)
-
-<!-- /TOC -->
 
 ### PyTorch Geometric
 

@@ -3,7 +3,11 @@ layout: post
 title: Classificação da base de dados Iris utilizando um perceptron multi-camadas em Keras
 tags: colab portugues keras neural-networks python classification tutorial
 categories: machine-learning
+toc:
+  sidebar: left
 ---
+
+## Introdução
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/13r1TY_BF1AXOMH8ufDEct3E8g243sONM?usp=sharing)
 
@@ -21,7 +25,7 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 ```
 
-# Sobre a base de dados
+## Sobre a base de dados
 
 A base de dados Iris contém 4 medidas de 150 flores individuais de 3 espécies distintas (50 flores de cada espécie). Ela foi criada em 1936 por Ronald Fisher [[link]](https://pt.wikipedia.org/wiki/Conjunto_de_dados_flor_Iris).
 
@@ -31,7 +35,7 @@ As medidas são a altura e larguras das [pétalas](https://pt.wikipedia.org/wiki
 ![Iris versicolor](https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Iris_versicolor_3.jpg/320px-Iris_versicolor_3.jpg)
 ![Iris virginica](https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Iris_virginica.jpg/295px-Iris_virginica.jpg)
 
-## Visualizando a Iris
+### Visualizando a Iris
 
 Apenas momentaneamente, utilizaremos o pacote *seaborn* para exibir as características das flores e suas espécies em um gráfico. Os pontos significam flores individuais, as cores simbolizam as espécies às quais cada flor pertence e linhas/colunas exibem pares de características *plotados* uns contra os outros.
 
@@ -50,7 +54,7 @@ Por exemplo, todas as flores da espécie *iris setosa* (em azul) possuem altura 
 
 Tudo o que uma rede neural faz durante o aprendizado é descobrir pontos de separação entre as classes, como o exemplificado acima, utilizando características (ou combinações de características) presentes na base de dados.
 
-## Preparando os dados
+### Preparando os dados
 
 Usaremos o pacote *scikit-learn* para carregar a base de dados e visualizar suas informações. As medidas das flores e suas respectivas classes são carregadas em variáveis distintas.
 
@@ -98,7 +102,7 @@ print('Qtd. itens no conj. de teste:', len(y_test))
     
     Qtd. itens no conj. de teste: 30
 
-## One-hot encoding
+### One-hot encoding
 
 A forma como as classes são representadas atualmente (0, 1 e 2) não é a melhor para que a rede aprenda a tarefa de classificação. Isso porque, caso a rede tenha apenas uma saída (um número entre 0 e 2), ao aprender a realizar a saída 2, a rede pode aos poucos "desaprender" a saída 0, por serem valores de classes opostos.
 
@@ -138,7 +142,7 @@ print(y_test_onehot[:5])
      [0. 1. 0.]
      [1. 0. 0.]]
 
-# Declarando a topologia da rede neural
+## Declarando a topologia da rede neural
 
 Neste notebook, uma rede neural será utilizada para descobrir a qual das 3 espécies cada flor pertence, dadas suas 4 medidas. Em outras palavras, a rede neural será um classificador treinado para prever em qual classe (de 3) um vetor de 4 valores pertence.
 
@@ -179,7 +183,7 @@ keras.utils.plot_model(
 
 Como uma biblioteca de redes neurais de alto nível, o Keras abstrai algumas complexidades da configuração do método de treinamento. Existem diferentes opções de otimizadores e funções de erro que podem ser utilizadas com a biblioteca, que podem ter diferentes efeitos no tempo de treinamento da rede. Opções comuns de otimizadores incluem `sgd` , `rmsprop` e `adam` . Já a função de erro `categorical_crossentropy` é a mais apropriada para tarefas de classificação multi-classes, quando as classes são representadas em *one-hot encoding*.
 
-# Treinando a rede
+## Treinando a rede
 
 Vamos treinar nossa rede neural. Ela aprenderá a realizar a classificação dos dados de treinamento ( `X_train` ) para as classes categorizadas ( `y_train_onehot` ) por um número de épocas pré-determinado.
 
@@ -233,7 +237,7 @@ plot_metrics(history)
 
 ![png](/assets/img/output_17_0.png)
 
-## Overfitting
+### Overfitting
 
 O treino da rede neural por muitas épocas no conjunto de treinamento pode fazer com que o modelo se especialize neste conjunto de dados, um fenômeno chamado [*overfitting*](https://pt.wikipedia.org/wiki/Sobreajuste).
 
@@ -259,7 +263,7 @@ plot_metrics(history)
 
 ![png](/assets/img/output_19_0.png)
 
-# Realizando inferências com o modelo treinado
+## Realizando inferências com o modelo treinado
 
 Vamos utilizar a rede treinada para classificar os dados de teste que separamos no início e visualizar as classes preditas pelo modelo. A rede neural classifica todo o conjunto de testes de uma vez.
 
@@ -320,7 +324,7 @@ print('Classes preditas:\t', y_pred_onehot)
     Classes reais:		 [1 2 2 1 0 2 1 0 0 1 2 0 1 2 2 2 0 0 1 0 0 2 0 2 0 0 0 2 2 0]
     Classes preditas:	 [1 2 2 1 0 2 1 0 0 1 2 0 1 2 2 2 0 0 1 0 0 2 0 2 0 0 0 2 2 0]
 
-# Avaliando a rede treinada
+## Avaliando a rede treinada
 
 Utilizamos o *scikit-learn* para produzir relatórios de classificação utilizando os valores reais e os preditos.
 
@@ -349,7 +353,7 @@ print(classification_report(y_test, y_pred_onehot))
     weighted avg       1.00      1.00      1.00        30
     
 
-## Detalhando precisão e revocação
+### Detalhando precisão e revocação
 
 A precisão e a revocação são valores relevantes sobre um modelo, porém suas definições podem ser um pouco confusas. Uma forma um pouco mais informativa de se pensar nestas medidas é utilizando-as na análise da eficácia de um teste médico hipotético (que toma o lugar de nosso modelo classificador) para uma doença e quais questões cada uma das medidas responde:
 
@@ -369,7 +373,7 @@ Devido a estas anomalias, é sempre preciso ponderar qual medida é mais importa
 
 A medida F-score (ou F-measure ou F1), também exibida acima, é uma combinação da precisão e da revocação e pode auxiliar na avaliação do classificador.
 
-# Matriz de confusão
+## Matriz de confusão
 
 A matriz de confusão compara, em números absolutos, as classes reais e preditas. Valores na diagonal principal indicam classificações corretas e qualquer outro valor indica erros de classificação no conjunto de testes.
 
@@ -381,7 +385,7 @@ print(confusion_matrix(y_test, y_pred_onehot))
      [ 0  6  0]
      [ 0  0 11]]
 
-# Conclusão
+## Conclusão
 
 Este *colab* apresentou um exemplo clássico e básico de classificação de uma base de dados utilizando redes neurais. Os seguintes conceitos foram apresentados ao longo do *colab*:
 
