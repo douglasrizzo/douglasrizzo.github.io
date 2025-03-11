@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Building movie recommendation systems using the MovieLens + TMDB datasets
+title: Building text-based movie recommendation systems using the TMDB dataset
 description: A showcase of TF-IDF, bi-encoders and cross-encoders
 category: recommendations-systems
 tags: sklearn python open-source recommendation-systems td-idf text-embeddings collaborative filtering content-based-filtering two-tower-recommendation-system
