@@ -3,7 +3,7 @@ layout: post
 title: Building text-based movie recommendation systems using the TMDB dataset
 description: A showcase of TF-IDF, bi-encoders and cross-encoders
 category: recommendations-systems
-tags: sklearn python open-source recommendation-systems td-idf text-embeddings collaborative filtering content-based-filtering two-tower-recommendation-system
+tags: sklearn python open-source recommendation-systems td-idf text-embeddings bi-encoders cross-encoders sentence-transformers kaggle
 mermaid:
   enabled: true
   zoomable: false
