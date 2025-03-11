@@ -19,8 +19,8 @@ We will implement two different ways of making a movie recommendation system and
 
 ## Resources
 
+- GitHub repository containing this project and a list of dependencies [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/douglasrizzo/recsys-movies/blob/master/src/text-based-movie-recs.ipynb).
 - Open this page in Google Colab [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/douglasrizzo/recsys-movies/blob/master/src/text-based-movie-recs.ipynb)
-- View the GitHub repo [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/douglasrizzo/recsys-movies/blob/master/src/text-based-movie-recs.ipynb)
 - [Read the contents in my website](https://douglasrizzo.com.br/blog/2025/03/text-based-movie-recs/)
 
 The following links instructed me on how to access a movie dataset and which libraries to use, especially the part on TF-IDF which inspired me to implement the other methods. You can check them out for more examples.
