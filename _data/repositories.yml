@@ -1,20 +1,14 @@
 github_users:
-  - douglasrizzo
+  - torvalds
+  - alshedivat
+
+repo_description_lines_max: 2
 
 github_repos:
-  - douglasrizzo/catsim
-  - douglasrizzo/dodo_detector_ros
-  - douglasrizzo/dodo_detector
-  - douglasrizzo/Classe-Latex-FEI
-  - douglasrizzo/JINT2020-ball-detection
-  - douglasrizzo/brnames
-  - douglasrizzo/spaceship-titanic
-  - douglasrizzo/matrix
-  - douglasrizzo/machine_learning
-  - douglasrizzo/enem2012-mariadb
-  - douglasrizzo/FEI3Birds
-  - douglasrizzo/csv_reader
-  - douglasrizzo/numerical_analysis
-  - douglasrizzo/search
-  - douglasrizzo/data_structures
-  - douglasrizzo/qsim
+  - alshedivat/al-folio
+  - jekyll/jekyll
+  - twbs/bootstrap
+  - jquery/jquery
+  - FortAwesome/Font-Awesome
+  - mathjax/MathJax
+  - jpswalsh/academicons
