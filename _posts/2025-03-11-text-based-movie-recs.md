@@ -145,26 +145,26 @@ It can be loosely interpreted as:
 
 $$tf(t, d) = \frac{\text{number of times } t \text{ appears in } d}{\text{sum of the number of times all other terms in } d \text{ also appear in } d}$$
 
-### Inverse term frequency
+### Inverse document frequency
 
 Inverse document frequency is a measure of how informative a given term $$t$$ is within the corpus $$D$$.
 
 If we define:
 
-- $$|D|$$ the number of documents in the corpus $$D$$ (the cardinality of set $$D$$) and
+- $$ \mid D \mid $$ as the number of documents in the corpus $$D$$ (the cardinality of set $$D$$) and
 - $$D' = \{d \in D:t \in d\}$$ as the set of documents in $$D$$ that also contain term $$t$$
 
 We can then compute the inverse document frequency $$idf$$ of a term $$t$$ in corpus $$D$$ as:
 
-$$idf(t, D) = \log \frac{|D|}{|D'|}$$
+$$idf(t, D) = \log \frac{ \mid D \mid }{ \mid D' \mid }$$
 
-Where once again $$|\cdot|$$ is the notation for the cardinality of a set.
+Where once again $$ \mid \cdot \mid $$ is the notation for the cardinality of a set.
 
 It can be interpreted as:
 
 $$idf(t, D) = \log \frac{\text{total number of documents}}{\text{number of documents in which } t \text{ appears}}$$
 
-The logarithm is used to balance the magnitude of the $$idf$$ function for terms that appear in too few document _vs_ those that appear in too many documents. You can view a chart of the $$idf$$ function for a term that appear in all documents $$(\frac{|D|}{|D'|} = 1)$$ all the way to a term that appears in 1% of the documents in a corpus $$(\frac{|D|}{|D'|} = 100)$$.
+The logarithm is used to balance the magnitude of the $$idf$$ function for terms that appear in too few document _vs_ those that appear in too many documents. You can view a chart of the $$idf$$ function for a term that appear in all documents $$(\frac{ \mid D \mid }{ \mid D' \mid } = 1)$$ all the way to a term that appears in 1% of the documents in a corpus $$(\frac{ \mid D \mid }{ \mid D' \mid } = 100)$$.
 
 ```python
 import matplotlib.pyplot as plt
@@ -173,7 +173,7 @@ import numpy as np
 x = np.arange(1, 101)
 y = np.log(x)
 plt.plot(x, y)
-plt.xlabel("$$\\frac{|D|}{|D'|}$$")
+plt.xlabel("$$\\frac{ \mid D \mid }{|D'|}$$")
 plt.ylabel("$$\\log(\\frac{|D|}{|D'|})$$")
 plt.show()
 ```
@@ -192,7 +192,7 @@ $$ tfidf(t, d, D) = tf(t, d) \cdot idf(t,D) $$
 
 ### Implementing the recommendation engine
 
-For this exercise, we will use scikit-learn to compute the $$tfidf$$ values of all words in all 10,1000 titles of our movies. This will generate a $$|T|\times|D|$$ matrix whose size you can see below.
+For this exercise, we will use scikit-learn to compute the $$tfidf$$ values of all words in all 10,1000 titles of our movies. This will generate a $$ \mid T \mid \times \mid D \mid $$ matrix whose size you can see below.
 
 ```python
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -385,7 +385,7 @@ from sentence_transformers import SentenceTransformer
 model = SentenceTransformer("all-MiniLM-L6-v2")
 ```
 
-The model is applied to the movie titles concatenated with their overviews and generate fixed-size embedding vectors of size 384. The output is a matrix of size $$|D| \times n$$, where $$n$$ is the dimension of the embedding vector.
+The model is applied to the movie titles concatenated with their overviews and generate fixed-size embedding vectors of size 384. The output is a matrix of size $$ \mid D \mid  \times n$$, where $$n$$ is the dimension of the embedding vector.
 
 ```python
 embeddings = model.encode(
