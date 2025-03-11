@@ -548,7 +548,7 @@ for q in questions:
 
 Answer: The equation for the action-value function update is given by:
 
-$$q_{\pi}(s,a) = R(s,a) + \<dummy32001>{ \gamma V_\pi (s') | s' \in S'} $$
+$$q_{\pi}(s,a) = R(s,a) + \mathbb{E} \left[ \gamma V_\pi (s') | s' \in S' \right] $$
 
 where $$R(s,a)$$ is the reward received when taking action a in state s and $$\gamma$$ is the discount factor.
 
