@@ -44,9 +44,9 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/cv/";
           },
-        },{id: "post-building-movie-recommendation-systems-using-the-movielens-tmdb-datasets",
+        },{id: "post-building-text-based-movie-recommendation-systems-using-the-tmdb-dataset",
       
-        title: "Building movie recommendation systems using the MovieLens + TMDB datasets",
+        title: "Building text-based movie recommendation systems using the TMDB dataset",
       
       description: "A showcase of TF-IDF, bi-encoders and cross-encoders",
       section: "Posts",
