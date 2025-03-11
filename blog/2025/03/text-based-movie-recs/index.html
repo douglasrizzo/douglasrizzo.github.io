@@ -1,0 +1,278 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Building movie recommendation systems using the MovieLens + TMDB datasets | Douglas Meneghetti </title> <meta name="author" content="Douglas De Rizzo Meneghetti"> <meta name="description" content="A showcase of TF-IDF, bi-encoders and cross-encoders"> <meta name="keywords" content="jekyll, jekyll-theme, academic-website, portfolio-website"> <link rel="stylesheet" href="/assets/css/bootstrap.min.css?a4b3f509e79c54a512b890d73235ef04"> <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/css/mdb.min.css" integrity="sha256-jpjYvU3G3N6nrrBwXJoVEYI/0zw8htfFnhT9ljN3JJw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="/assets/css/academicons.min.css?f0b7046b84e425c55f3463ac249818f5"> <link defer rel="stylesheet" href="/assets/css/scholar-icons.css?62b2ac103a88034e6882a5be5f3e2772"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%E2%9A%9B%EF%B8%8F&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?d41d8cd98f00b204e9800998ecf8427e"> <link rel="canonical" href="https://douglasrizzo.github.io/blog/2025/03/text-based-movie-recs/"> <script src="/assets/js/theme.js?9a0c749ec5240d9cda97bc72359a72c0"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> </head> <body class="fixed-top-nav sticky-bottom-footer"> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> Douglas Meneghetti </a> <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse text-right" id="navbarNav"> <ul class="navbar-nav ml-auto flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item active"> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">publications </a> </li> <li class="nav-item "> <a class="nav-link" href="/projects/">projects </a> </li> <li class="nav-item "> <a class="nav-link" href="/repositories/">repositories </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">cv </a> </li> <li class="nav-item"> <button id="search-toggle" title="Search" onclick="openSearchModal()"> <span class="nav-link">ctrl k <i class="ti ti-search"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" title="Change theme"> <i class="ti ti-sun-moon" id="light-toggle-system"></i> <i class="ti ti-moon-filled" id="light-toggle-dark"></i> <i class="ti ti-sun-filled" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">Building movie recommendation systems using the MovieLens + TMDB datasets</h1> <p class="post-meta"> Created on March 11, 2025 </p> <p class="post-tags"> <a href="/blog/2025"> <i class="fa-solid fa-calendar fa-sm"></i> 2025 </a>   ·   <a href="/blog/tag/sklearn"> <i class="fa-solid fa-hashtag fa-sm"></i> sklearn</a>   <a href="/blog/tag/python"> <i class="fa-solid fa-hashtag fa-sm"></i> python</a>   <a href="/blog/tag/open-source"> <i class="fa-solid fa-hashtag fa-sm"></i> open-source</a>   <a href="/blog/tag/recommendation-systems"> <i class="fa-solid fa-hashtag fa-sm"></i> recommendation-systems</a>   <a href="/blog/tag/td-idf"> <i class="fa-solid fa-hashtag fa-sm"></i> td-idf</a>   <a href="/blog/tag/text-embeddings"> <i class="fa-solid fa-hashtag fa-sm"></i> text-embeddings</a>   <a href="/blog/tag/collaborative"> <i class="fa-solid fa-hashtag fa-sm"></i> collaborative</a>   <a href="/blog/tag/filtering"> <i class="fa-solid fa-hashtag fa-sm"></i> filtering</a>   <a href="/blog/tag/content-based-filtering"> <i class="fa-solid fa-hashtag fa-sm"></i> content-based-filtering</a>   <a href="/blog/tag/two-tower-recommendation-system"> <i class="fa-solid fa-hashtag fa-sm"></i> two-tower-recommendation-system</a>   ·   <a href="/blog/category/recommendations-systems"> <i class="fa-solid fa-tag fa-sm"></i> recommendations-systems</a> </p> </header> <article class="post-content"> <div id="markdown-content"> <p>In this project, we will implement a text-based recommendation system for movies.</p> <p>The idea is that our recommendation engine provide a user with recommendations of new movies based on how similar the title of a movie the user has already watched is to the the titles of other movies in the database.</p> <p>We will implement two different ways of making a movie recommendation system and one way of making a movie reranking system, based solely on the title and overview of a movie a hypothetical user might enjoy. The techniques we will employ are TF-IDF and bi-encoders. The movie reranker wil be implemented using a cross-encoder.</p> <h2 id="resources">Resources</h2> <p>The following links instructed me on how to access a movie dataset and which libraries to use, especially the part on TF-IDF which inspired me to implement the other methods. You can check them out for more examples.</p> <ul> <li><a href="https://www.datacamp.com/tutorial/recommender-systems-python" rel="external nofollow noopener" target="_blank">Beginner Tutorial: Recommender Systems in Python</a></li> <li><a href="https://www.kaggle.com/code/ibtesama/getting-started-with-a-movie-recommendation-system" rel="external nofollow noopener" target="_blank">Getting Started with a Movie Recommendation System</a></li> </ul> <h2 id="downloading-the-dataset">Downloading the dataset</h2> <p>For this exercise, we will use The Movie Database (TMDb), a dataset containing movies and their features. It does not contain user-related information, such as how many people watched a movie or movie ratings. We will use <a href="https://www.kaggle.com/datasets/asaniczka/tmdb-movies-dataset-2023-930k-movies" rel="external nofollow noopener" target="_blank">a version provided by Kaggle user asaniczka</a>, which is constantly updated.</p> <p>To download it, we will use the Python package <code class="language-plaintext highlighter-rouge">kagglehub</code>.</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">pathlib</span> <span class="k">as</span> <span class="n">pl</span>
+
+<span class="kn">import</span> <span class="n">kagglehub</span>
+<span class="kn">import</span> <span class="n">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+
+<span class="n">tmdb_path</span> <span class="o">=</span> <span class="nf">next</span><span class="p">(</span>
+  <span class="nf">iter</span><span class="p">(</span><span class="n">pl</span><span class="p">.</span><span class="nc">Path</span><span class="p">(</span><span class="n">kagglehub</span><span class="p">.</span><span class="nf">dataset_download</span><span class="p">(</span><span class="sh">"</span><span class="s">asaniczka/tmdb-movies-dataset-2023-930k-movies</span><span class="sh">"</span><span class="p">)).</span><span class="nf">glob</span><span class="p">(</span><span class="sh">"</span><span class="s">*.csv</span><span class="sh">"</span><span class="p">))</span>
+<span class="p">)</span>
+</code></pre></div></div> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Resuming download from 179306496 bytes (41578107 bytes left)...
+Resuming download from https://www.kaggle.com/api/v1/datasets/download/asaniczka/tmdb-movies-dataset-2023-930k-movies?dataset_version_number=506 (179306496/220884603) bytes left.
+
+
+100%|██████████| 211M/211M [00:08&lt;00:00, 4.74MB/s]
+
+Extracting files...
+</code></pre></div></div> <p>You can see in the cells below a sample of the data we will use. At the time of this project, there were over 940,000 movies available on the dataset.</p> <p>We are only intetrested in the title and overview of the movies, so we will drop the other columns.</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">movie_metadata</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nf">read_csv</span><span class="p">(</span><span class="n">tmdb_path</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="sh">"</span><span class="s">id</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">movie_metadata</span> <span class="o">=</span> <span class="n">movie_metadata</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="o">~</span><span class="n">movie_metadata</span><span class="p">[</span><span class="sh">"</span><span class="s">overview</span><span class="sh">"</span><span class="p">].</span><span class="nf">isna</span><span class="p">(),</span> <span class="p">[</span><span class="sh">"</span><span class="s">title</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">overview</span><span class="sh">"</span><span class="p">]]</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">movie_metadata</span><span class="p">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">movie_metadata</span><span class="p">.</span><span class="nf">head</span><span class="p">()</span>
+</code></pre></div></div> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(941184, 2)
+</code></pre></div></div> <div> <style scoped="">.dataframe tbody tr th:only-of-type{vertical-align:middle}.dataframe tbody tr th{vertical-align:top}.dataframe thead th{text-align:right}</style> <table border="1" class="dataframe"> <thead> <tr style="text-align: right;"> <th></th> <th>title</th> <th>overview</th> </tr> <tr> <th>id</th> <th></th> <th></th> </tr> </thead> <tbody> <tr> <th>27205</th> <td>Inception</td> <td>Cobb, a skilled thief who commits corporate es...</td> </tr> <tr> <th>157336</th> <td>Interstellar</td> <td>The adventures of a group of explorers who mak...</td> </tr> <tr> <th>155</th> <td>The Dark Knight</td> <td>Batman raises the stakes in his war on crime. ...</td> </tr> <tr> <th>19995</th> <td>Avatar</td> <td>In the 22nd century, a paraplegic Marine is di...</td> </tr> <tr> <th>24428</th> <td>The Avengers</td> <td>When an unexpected enemy emerges and threatens...</td> </tr> </tbody> </table> </div> <p>For the purposes of our project, we will only work with a sample of 10,000 movies, since the machine learning methods we will employ can be compute or memory intensive.</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">movie_metadata</span> <span class="o">=</span> <span class="n">movie_metadata</span><span class="p">.</span><span class="nf">sample</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">).</span><span class="nf">sort_index</span><span class="p">()</span>
+</code></pre></div></div> <h2 id="title-based-recommendations-using-tf-idf">Title-based recommendations using TF-IDF</h2> <p>The first technique we will implement is term frequency-inverse document frequency, or TF-IDF for short. It is an information retrieval technique in which a term \(t_1\) inside a document \(d_1\) is given a weight based on how frequently it appears in that document, compared to how frequently it appears in all other documents of our corpus. The intuitition is that:</p> <ul> <li>if \(t_1\) is very common in \(d_1\), it might be relevant to the context of \(d_1\). This value is called the <strong>term frequency</strong>.</li> <li>if \(t_1\) does not appear as frequently in other documents, it might be very specific to the context of \(d_1\) <em>in particular</em>, so it might be very relevant. This term is called the <strong>inverse document frequency</strong>.</li> </ul> <p>However, if \(t_1\) also appears very frequently in other documents, it might not be a very informative term. Think about the word <em>“the”</em>, which may appear very frequently in a single document, but we can also find it in many other documents of a corpus.</p> <h3 id="term-frequency">Term frequency</h3> <p>Term frequency is the relative frequency of a term within a document:</p> \[tf(t, d) = \frac{f(t, d)}{\sum_{t' \in d} f(t', d)}\] <p>Where \(t\) is a term, \(d\) is a document, \(t'\) are the other terms in \(d\) which are not \(t\) and the function \(f(t, d)\) depicts the raw number of times \(t\) appears in \(d\).</p> <p>It can be loosely interpreted as:</p> \[tf(t, d) = \frac{\text{number of times } t \text{ appears in } d}{\text{sum of the number of times all other terms in } d \text{ also appear in } d}\] <h3 id="inverse-term-frequency">Inverse term frequency</h3> <p>Inverse document frequency is a measure of how informative a given term \(t\) is within the corpus \(D\).</p> <p>If we define:</p> <ul> <li> <table> <tbody> <tr> <td>$$</td> <td>D</td> <td>\(the number of documents in the corpus\)D\((the cardinality of set\)D$$) and</td> </tr> </tbody> </table> </li> <li>\(D' = \{d \in D:t \in d\}\) as the set of documents in \(D\) that also contain term \(t\)</li> </ul> <p>We can then compute the inverse document frequency \(idf\) of a term \(t\) in corpus \(D\) as:</p> \[idf(t, D) = \log \frac{|D|}{|D'|}\] <table> <tbody> <tr> <td>Where once again $$</td> <td>\cdot</td> <td>$$ is the notation for the cardinality of a set.</td> </tr> </tbody> </table> <p>It can be interpreted as:</p> \[idf(t, D) = \log \frac{\text{total number of documents}}{\text{number of documents in which } t \text{ appears}}\] <table> <tbody> <tr> <td>The logarithm is used to balance the magnitude of the \(idf\) function for terms that appear in too few document <em>vs</em> those that appear in too many documents. You can view a chart of the \(idf\) function for a term that appear in all documents $$(\frac{</td> <td>D</td> <td>}{</td> <td>D’</td> <td>} = 1)\(all the way to a term that appears in 1% of the documents in a corpus\)(\frac{</td> <td>D</td> <td>}{</td> <td>D’</td> <td>} = 100)$$.</td> </tr> </tbody> </table> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">101</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">xlabel</span><span class="p">(</span><span class="sh">"</span><span class="s">$$</span><span class="se">\\</span><span class="s">frac{|D|}{|D</span><span class="sh">'</span><span class="s">|}$$</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">ylabel</span><span class="p">(</span><span class="sh">"</span><span class="s">$$</span><span class="se">\\</span><span class="s">log(</span><span class="se">\\</span><span class="s">frac{|D|}{|D</span><span class="sh">'</span><span class="s">|})$$</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">show</span><span class="p">()</span>
+</code></pre></div></div> <p><img src="/assets/img/idf_chart.png" alt="png"></p> <p>Finally, we can compute the \(tfidf\) value for a term \(t\) inside a document \(d\) relative to a corpus \(D\) as:</p> \[tfidf(t, d, D) = tf(t, d) \cdot idf(t,D)\] <h3 id="interpreting-tfidf">Interpreting \(tfidf\)</h3> <ul> <li>If the relative frequency of \(t\) inside \(d\) is high, then \(tf(t, d)\) will be high</li> <li>If \(t\)’s frequency inside all other documents in \(D\) is small, them \(idf(t, D)\) will be high</li> <li>This makes \(tfidf(t, d, D)\) high, meaning that the relevance of \(t\) in \(d\) compared to the other documents in \(D\) must be high</li> </ul> <h3 id="implementing-the-recommendation-engine">Implementing the recommendation engine</h3> <table> <tbody> <tr> <td>For this exercise, we will use scikit-learn to compute the \(tfidf\) values of all words in all 10,1000 titles of our movies. This will generate a $$</td> <td>T</td> <td>\times</td> <td>D</td> <td>$$ matrix whose size you can see below.</td> </tr> </tbody> </table> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+
+<span class="n">tfidf</span> <span class="o">=</span> <span class="nc">TfidfVectorizer</span><span class="p">(</span><span class="n">stop_words</span><span class="o">=</span><span class="sh">"</span><span class="s">english</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">tfidf_matrix</span> <span class="o">=</span> <span class="n">tfidf</span><span class="p">.</span><span class="nf">fit_transform</span><span class="p">(</span><span class="n">movie_metadata</span><span class="p">[</span><span class="sh">"</span><span class="s">overview</span><span class="sh">"</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">tfidf_matrix</span><span class="p">.</span><span class="n">shape</span><span class="p">)</span>
+</code></pre></div></div> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(10000, 35994)
+</code></pre></div></div> <h3 id="computing-similarities">Computing similarities</h3> <p>In our example, each document \(d\) is a single movie title and the corresponding vector in the tfidf matrix can be considered a numerical feature vector representing the movie title. We can compute how similar these feature vectorsamongst each other by using similarity metrics such as the <a href="https://en.wikipedia.org/wiki/Cosine_similarity" rel="external nofollow noopener" target="_blank">cosine similarity</a>, which we will employ below.</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cosine_sim</span> <span class="o">=</span> <span class="p">(</span><span class="n">tfidf_matrix</span> <span class="o">*</span> <span class="n">tfidf_matrix</span><span class="p">.</span><span class="n">T</span><span class="p">).</span><span class="nf">toarray</span><span class="p">()</span>
+<span class="n">cosine_sim</span><span class="p">.</span><span class="n">shape</span>
+</code></pre></div></div> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(10000, 10000)
+</code></pre></div></div> <p>This gives us back a matrix of similarities \(S\) in which \(S_{x,y}\) denote how similar the titles of movies in position \(x\) and \(y\) are. This is a symmetric matrix \((S_{x,y} = S_{y,x})\) in which all elements in the diagonal are equal to 1 \((S_{x,x} = 1)\).</p> <h3 id="recovering-movies-with-similar-titles">Recovering movies with similar titles</h3> <p>Now, we can select a random movie from our dataset and retrieve the other movies whose titles are similar to it, according to how similar their \(tfidf\) vectors are under the cosine similarity. The function below does that.</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">operator</span>
+
+
+<span class="k">def</span> <span class="nf">get_recommendations</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">sim_matrix</span><span class="p">):</span>
+  <span class="n">movie_title</span> <span class="o">=</span> <span class="n">movie_metadata</span><span class="p">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="sh">"</span><span class="s">title</span><span class="sh">"</span><span class="p">]</span>
+  <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Top recommendations for </span><span class="si">{</span><span class="n">movie_title</span><span class="si">}</span><span class="s">:</span><span class="sh">"</span><span class="p">)</span>
+  <span class="n">sim_scores</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="nf">enumerate</span><span class="p">(</span><span class="n">sim_matrix</span><span class="p">[</span><span class="n">idx</span><span class="p">]))</span>
+  <span class="n">sim_scores</span> <span class="o">=</span> <span class="nf">sorted</span><span class="p">(</span><span class="n">sim_scores</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">operator</span><span class="p">.</span><span class="nf">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+  <span class="n">sim_scores</span> <span class="o">=</span> <span class="n">sim_scores</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">31</span><span class="p">]</span>
+  <span class="n">movie_indices</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sim_scores</span><span class="p">]</span>
+  <span class="k">return</span> <span class="n">movie_metadata</span><span class="p">[</span><span class="sh">"</span><span class="s">title</span><span class="sh">"</span><span class="p">].</span><span class="n">iloc</span><span class="p">[</span><span class="n">movie_indices</span><span class="p">]</span>
+</code></pre></div></div> <p>We can see from in the results below the subset of most similar items to the one whose title is listed. You can judge for yourself whether they are actually similar, but the usefulness of a recommendation engine that searches for movies with similar titles is questionable.</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="nf">get_recommendations</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">cosine_sim</span><span class="p">))</span>
+</code></pre></div></div> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Top recommendations for Megacities:
+id
+164535         Trilogia - Il pensiero, lo sguardo, la parola
+410067                     Pasolini and the Form of the City
+516906                                      Die Republikaner
+529837        Villa Air Bel. Varian Fry in Marseille 1940/41
+558799                  Bella Italia - Zuflucht auf Widerruf
+620839                                        Leszármazottak
+1368150                                             Solitudo
+1170754                 ...bis zum Bundesverfassungsgericht!
+1408577                        In the Mix with Jabaar Edmond
+911602                                           Window Feel
+428078                                        Mortal Engines
+123022                                       Whispering Hope
+1144526    Bubble &amp; Squeak murder:  The Killing of David ...
+1365387    Freedom Film Series: A Higher Law: The Oberlin...
+723978                                     Tierra de mujeres
+646953                                         Fleischwochen
+1325493                                      Songs in Greece
+1230804                                       Experimentally
+619614                   Blood Loss: Survival of the Fittest
+851645                                         Telos or Bust
+1162956                                       Memento Vivere
+1208493                                      Floral Symphony
+1364447                                             Parkside
+1153924                             Soy del tiempo de Gardel
+924502                                                 Norma
+610049                                       The Narrow Path
+235194                                My True Love, My Wound
+283054                                           Naked World
+319215                         The Hidden Side of the Bottom
+617036                             Seven Islands and a Metro
+Name: title, dtype: object
+</code></pre></div></div> <h2 id="movie-recommendations-based-on-sentence-embeddings">Movie recommendations based on sentence embeddings</h2> <p>In this next part of the project, we will expand our text-based recommendation engine by incorporating information about the movie overview into our similarity search.</p> <p>When doing this, we face a fundamental problem: the size of our vocabulary (the set of all individual terms in all documents of our corpus) is very large, which may make computing tfidf prohibitive. Also, the feature vectors for all our moview would all be sparse as most movie overviews do not contain many words from our vocabulary.</p> <p>To combat this, we can use an encoder-only transformer architecture, such as BERT and its variants, trained as a bi-encoder, to encode our arbitrarily long texts into fixed-size embeddings.</p> <h3 id="encoder-only-transformers">Encoder-only transformers</h3> <p>These are neural network architectures whose only purpose is to transform text data into embeddings. Unlike <em>causal language models</em> such as GPT, who are trained for next-token prediction and thus do not always have access to the full context of the text, encoder-only models (also called <em>masked language models</em>) have access to the full context of the text in order to generate its embedding.</p> <p>These models can be trained for a multitude of tasks, such as text classification, sentiment analysis and even masked language modeling. After training ends, these models are able to generate fixed size text embeddings.</p> <pre><code class="language-mermaid">graph BT
+    subgraph Causal language modeling
+        direction BT
+        CLM[GPT]
+        You2(You) --&gt; CLM
+        must2(must) --&gt; CLM
+        construct --&gt; CLM
+        additional2(additional) --&gt; CLM
+        CLM --&gt; pylons@{ shape: stadium }
+
+        style CLM fill:#248315
+    end
+
+    subgraph Masked language modeling
+        direction BT
+        MLM[BERT]
+        You1(You) --&gt; MLM
+        must1(must) --&gt; MLM
+        MASK1["&lt;font color='red'&gt;&amp;ltMASK&amp;gt&lt;/font&gt;"] --&gt; MLM
+        additional1(additional) --&gt; MLM
+        pylons1(pylons) --&gt; MLM
+        MLM --&gt; additional@{ shape: stadium }
+
+        style MLM fill:#248315
+    end
+</code></pre> <h3 id="bi-encoders">Bi-encoders</h3> <p>A bi-encoder is a special kind of encoder-only transformer which is trained on labeled data, containing pairs of texts accompanied by a similarity score as in the example below.</p> <table> <thead> <tr> <th>Sentence 1</th> <th>Sentence 2</th> <th>Similarity</th> </tr> </thead> <tbody> <tr> <td>I love you</td> <td>I love my cat</td> <td>0.82</td> </tr> <tr> <td>I love you</td> <td>You must construct additional pylons</td> <td>0.04</td> </tr> </tbody> </table> <p>One example dataset is the Semantic Textual Similarity Benchmark (STSB). <a href="https://huggingface.co/datasets/sentence-transformers/stsb" rel="external nofollow noopener" target="_blank">[Hugging Face Hub]</a> <a href="https://paperswithcode.com/dataset/sts-benchmark" rel="external nofollow noopener" target="_blank">[Papers with Code]</a></p> <p>The bi-encoder is then trained in a siamese fashion so that the embeddings of texts with high similarity are also similar amongst themselves, whereas the embeddings of texts with low similarity have embeddings further away from each other. During inference, the model is individually applied to two pieces of texts and their output embeddings can be compared using cosine similarity.</p> <pre><code class="language-mermaid">graph TD
+  subgraph Inference time
+    direction BT
+    AI1[Sentence A]
+    AI2[BERT]
+    AI3[pooling]
+    AI4[u]
+    BI1[Sentence B]
+    BI2[BERT]
+    BI3[pooling]
+    BI4[v]
+    CI1["cosine-sim(u,v)"]
+    CI2@{ shape: stadium, label : "[-1;1]" }
+    AI1 --&gt; AI2 --&gt; AI3 --&gt; AI4 --&gt; CI1
+    BI1 --&gt; BI2 --&gt; BI3 --&gt; BI4 --&gt; CI1
+    CI1 --&gt; CI2
+  end
+
+  subgraph Training time
+    direction BT
+    AT1[Sentence A]
+    AT2[Bert]
+    AT3[pooling]
+    AT4[u]
+    BT1[Sentence B]
+    BT2[Bert]
+    BT3[pooling]
+    BT4[v]
+    CT1["(u, v, |u-v|)"]
+    CT2[softmax classifier]
+    AT1 --&gt; AT2 --&gt; AT3 --&gt; AT4 --&gt; CT1
+    BT1 --&gt; BT2 --&gt; BT3 --&gt; BT4 --&gt; CT1
+    CT1 --&gt; CT2
+  end
+</code></pre> <p>The image above is adapted from https://arxiv.org/abs/1908.10084. They mention training their bi-encoder as a classifier using cross-entropy, but do not get into details about how they do it. Other approaches include using regression to predict the cosine similarity or contrastive learning with contrastive or triplet loss in pairs of pairs of similar/dissimilar texts or triples of anchor/similar/dissimilar texts, respectively.</p> <h4 id="advantages-of-bi-encoders">Advantages of bi-encoders</h4> <ol> <li>Embedding vector calculation is usually fast and lightweight</li> <li>Embedding vectors for each text can be stored adfter being computed and reutilized</li> <li>Comparison between embedding vectors is fast, using cosine similarity</li> </ol> <h3 id="implementing-our-recommendation-system">Implementing our recommendation system</h3> <p>For our project, we will use the <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2" rel="external nofollow noopener" target="_blank">all-MiniLM-L6-v2</a> model, which is trained using contrastive learning on pairs of sentences.</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">sentence_transformers</span> <span class="kn">import</span> <span class="n">SentenceTransformer</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="nc">SentenceTransformer</span><span class="p">(</span><span class="sh">"</span><span class="s">all-MiniLM-L6-v2</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div> <table> <tbody> <tr> <td>The model is applied to the movie titles concatenated with their overviews and generate fixed-size embedding vectors of size 384. The output is a matrix of size $$</td> <td>D</td> <td>\times n\(, where\)n$$ is the dimension of the embedding vector.</td> </tr> </tbody> </table> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">embeddings</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="nf">encode</span><span class="p">(</span>
+  <span class="p">(</span><span class="n">movie_metadata</span><span class="p">[</span><span class="sh">"</span><span class="s">title</span><span class="sh">"</span><span class="p">]</span> <span class="o">+</span> <span class="sh">"</span><span class="s"> </span><span class="sh">"</span> <span class="o">+</span> <span class="n">movie_metadata</span><span class="p">[</span><span class="sh">"</span><span class="s">overview</span><span class="sh">"</span><span class="p">]).</span><span class="nf">to_list</span><span class="p">(),</span> <span class="n">show_progress_bar</span><span class="o">=</span><span class="bp">True</span>
+<span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">embeddings</span><span class="p">.</span><span class="n">shape</span><span class="p">)</span>
+</code></pre></div></div> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Batches:   0%|          | 0/313 [00:00&lt;?, ?it/s]
+
+
+(10000, 384)
+</code></pre></div></div> <h3 id="recovering-movies">Recovering movies</h3> <p>Once again, we recover the movies that are most similar to a randomly selected one based on the similarities between their embeddings.</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">top_recommendations</span> <span class="o">=</span> <span class="nf">get_recommendations</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">model</span><span class="p">.</span><span class="nf">similarity</span><span class="p">(</span><span class="n">embeddings</span><span class="p">,</span> <span class="n">embeddings</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">top_recommendations</span><span class="p">)</span>
+</code></pre></div></div> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Top recommendations for Billy Elliot:
+id
+38848                                A Few Days in September
+1257034        Weatherday Live @ The Ukie Club Philly 8/7/23
+372489                                                  1980
+1270247                                    Bad Boy Fuck Club
+11017                                          Billy Madison
+18141                                  The Elementary School
+472025                                      Dublin Oldschool
+581089                                      Haunting Douglas
+657923                      Neil Young - BBC In Concert 1971
+1006663                                            1985-1986
+521639                                           County Line
+672083                                       The Winslow Boy
+1310228                                             Identity
+150518                                      Tenth Avenue Kid
+192390                              The Hoosier Schoolmaster
+8271                                               Disturbia
+1087097                                              Lootin'
+1175745                            Bad Kids with Saint Names
+127523                                            True Blood
+527130                      Unforgettable Memory of a Friend
+1208250                                         Cadet School
+36961                                                      G
+228944                                Billy Childish Is Dead
+579357                                           The Dumb Ox
+1373646                                                Grown
+107598                                   The Kid from Kokomo
+463249                                     Say! Young Fellow
+470185                                            Schoolgrlz
+601619     Danny Adler: Trespassin' at King Records - The...
+124487                                          Rhythm Thief
+Name: title, dtype: object
+</code></pre></div></div> <h3 id="cross-encoders">Cross-encoders</h3> <p>Another transformer architecture that allows us to build a text-based recommendation system is the <em>cross-encoder</em> <a href="https://arxiv.org/abs/1901.04085" rel="external nofollow noopener" target="_blank">[1]</a><a href="https://arxiv.org/abs/2101.08751" rel="external nofollow noopener" target="_blank">[2]</a>. Unlike the bi-encoder, it takes a pair of sentences as input, concatenating them and separating them by a special token, and produces an output in the range \([0; 1]\) indicating how similar they are.</p> <pre><code class="language-mermaid">graph BT
+  A(Sentence A) --&gt; concat
+  B(Sentence B) --&gt; concat
+  concat --&gt; BERT --&gt; Classifier --&gt; Output@{shape: circle, label: "[0; 1]"}
+</code></pre> <p>Due to their high computational complexity and usually better results than bi-=encoders, cross-encoders are usually used in the re-ranking step of recommendation systems, in which a subset of recommendations has already been selected by previous, more lightweight methods.</p> <p><strong>Advantages of cross-encoders</strong></p> <ul> <li>Tend to have better results in computing sentence similarity than bi-encoders.</li> </ul> <p><strong>Disadvantages of cross-encoders</strong></p> <ul> <li>Computational complexity of using cross-encoders is quadratic compared to the linear complexity of bi-encoders, as every comparison between a new piece of text and texts in storage must use the cross-encoder transformer.</li> </ul> <h3 id="implementing-a-movie-reranker-using-a-cross-encoder">Implementing a movie reranker using a cross-encoder</h3> <p>The code below employs a cross-encoder to rerank the movies selected by the bi-encoder of the previous section. It returns similarity scores between the title and overview of the original movie and the pre-selected movies.</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">sentence_transformers.cross_encoder</span> <span class="kn">import</span> <span class="n">CrossEncoder</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="nc">CrossEncoder</span><span class="p">(</span><span class="sh">"</span><span class="s">cross-encoder/stsb-roberta-base</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="n">ranks</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="nf">rank</span><span class="p">(</span>
+  <span class="n">movie_metadata</span><span class="p">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="sh">"</span><span class="s">title</span><span class="sh">"</span><span class="p">]</span> <span class="o">+</span> <span class="sh">"</span><span class="s"> </span><span class="sh">"</span> <span class="o">+</span> <span class="n">movie_metadata</span><span class="p">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="sh">"</span><span class="s">overview</span><span class="sh">"</span><span class="p">],</span>
+  <span class="n">top_recommendations</span><span class="p">,</span>
+  <span class="n">show_progress_bar</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">ranks</span> <span class="o">=</span> <span class="p">{</span><span class="n">rank</span><span class="p">[</span><span class="sh">"</span><span class="s">corpus_id</span><span class="sh">"</span><span class="p">]:</span> <span class="n">rank</span><span class="p">[</span><span class="sh">"</span><span class="s">score</span><span class="sh">"</span><span class="p">]</span> <span class="k">for</span> <span class="n">rank</span> <span class="ow">in</span> <span class="n">ranks</span><span class="p">}</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">pd</span><span class="p">.</span><span class="nc">Series</span><span class="p">(</span><span class="n">ranks</span><span class="p">))</span>
+</code></pre></div></div> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Batches:   0%|          | 0/1 [00:00&lt;?, ?it/s]
+
+
+2     0.365634
+26    0.360351
+24    0.293843
+10    0.291097
+12    0.258833
+9     0.257831
+22    0.247428
+4     0.222584
+21    0.219410
+5     0.211042
+19    0.175163
+14    0.175003
+20    0.174640
+27    0.173403
+11    0.148287
+23    0.146889
+0     0.146843
+13    0.145361
+29    0.145283
+1     0.124511
+16    0.117132
+25    0.108611
+6     0.101460
+3     0.099316
+18    0.097358
+17    0.080527
+7     0.064563
+8     0.062674
+28    0.051764
+15    0.049922
+dtype: float32
+</code></pre></div></div> <p>Finally, we produce the list of reranked movies.</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ranks_idx_sorted</span> <span class="o">=</span> <span class="nf">sorted</span><span class="p">(</span><span class="nf">zip</span><span class="p">(</span><span class="n">ranks</span><span class="p">.</span><span class="nf">keys</span><span class="p">(),</span> <span class="n">ranks</span><span class="p">.</span><span class="nf">values</span><span class="p">(),</span> <span class="n">strict</span><span class="o">=</span><span class="bp">False</span><span class="p">),</span> <span class="n">key</span><span class="o">=</span><span class="n">operator</span><span class="p">.</span><span class="nf">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">ranks_idx_sorted</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">ranks_idx_sorted</span><span class="p">]</span>
+<span class="n">top_recommendations</span><span class="p">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">ranks_idx_sorted</span><span class="p">]</span>
+</code></pre></div></div> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>id
+372489                                                  1980
+463249                                     Say! Young Fellow
+1373646                                                Grown
+521639                                           County Line
+1310228                                             Identity
+1006663                                            1985-1986
+228944                                Billy Childish Is Dead
+11017                                          Billy Madison
+36961                                                      G
+18141                                  The Elementary School
+527130                      Unforgettable Memory of a Friend
+192390                              The Hoosier Schoolmaster
+1208250                                         Cadet School
+470185                                            Schoolgrlz
+672083                                       The Winslow Boy
+579357                                           The Dumb Ox
+38848                                A Few Days in September
+150518                                      Tenth Avenue Kid
+124487                                          Rhythm Thief
+1257034        Weatherday Live @ The Ukie Club Philly 8/7/23
+1087097                                              Lootin'
+107598                                   The Kid from Kokomo
+472025                                      Dublin Oldschool
+1270247                                    Bad Boy Fuck Club
+127523                                            True Blood
+1175745                            Bad Kids with Saint Names
+581089                                      Haunting Douglas
+657923                      Neil Young - BBC In Concert 1971
+601619     Danny Adler: Trespassin' at King Records - The...
+8271                                               Disturbia
+Name: title, dtype: object
+</code></pre></div></div> <h2 id="conclusions">Conclusions</h2> <p>This project showcased two different ways of making a movie recommendations systems and one way of making a movie reranking system, based solely on the title and overview of a movie a hypothetical user might enjoy. Movies with similar titles and overviews to the original one can be recovered using techniques such as TF-IDF, bi-encoders or cross-encoders and can also be reranked using any of these techniques, especially the most precise but computationnaly expensive ones such as the cross-encoder.</p> <p>We have gone on an overview of how TF-IDF, bi-encoders and cross-encoders are trained and work and implemented everything in Python using open source packages such as scikit-learn and sentence_transformers, as well the open TMDb movies dataset, which is downloaded automatically from Kaggle use the kagglehub package.</p> <p>These techniques are obviously not constrained to movie recommendations and can be used to perform similarity search on any text corpus.</p> <p>Se you guys next time!</p> </div> </article> <br> <hr> <br> <ul class="list-disc pl-8"></ul> <h2 class="text-3xl font-semibold mb-4 mt-12">Enjoy Reading This Article?</h2> <p class="mb-2">Here are some more articles you might like to read next:</p> <li class="my-2"> <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/blog/2024/03/local-gemma-chatbot-langchain-ollama/">Running a Gemma-powered question-answering chatbot locally with LangChain + Ollama</a> </li> <li class="my-2"> <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/blog/2024/02/llm-qa-obsidian-rag/">Answering questions from an Obsidian database with LLMs + RAG</a> </li> <li class="my-2"> <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/blog/2020/07/ts-queue-experiments/">Using task-spooler to queue experiments on Linux</a> </li> <li class="my-2"> <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/blog/2021/06/mathematics-self-study/">Resources to self-study mathematics for machine learning</a> </li> <li class="my-2"> <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/blog/2020/08/tf-obj-tutorial/">How to train your own object detection models using the TensorFlow Object Detection API (2020 Update)</a> </li> </div> </div> <footer class="sticky-bottom mt-5" role="contentinfo"> <div class="container"> © Copyright 2025 Douglas De Rizzo Meneghetti. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="external nofollow noopener">GitHub Pages</a>. Photos from <a href="https://unsplash.com" target="_blank" rel="external nofollow noopener">Unsplash</a>. </div> </footer> <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> <script src="/assets/js/bootstrap.bundle.min.js"></script> <script src="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/js/mdb.min.js" integrity="sha256-NdbiivsvWt7VYCt6hYNT3h/th9vSTL4EDWeGs5SN3DA=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?a0db7e5d5c70cc3252b3138b0c91dcaf" type="text/javascript"></script> <script defer src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js" integrity="" crossorigin="anonymous"></script> <script defer src="/assets/js/mermaid-setup.js?38ca0a0126f7328d2d9a46bad640931f" type="text/javascript"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/js/zoom.js?85ddb88934d28b74e78031fd54cf8308"></script> <script src="/assets/js/no_defer.js?2781658a0a2b13ed609542042a859126"></script> <script defer src="/assets/js/common.js?e0514a05c5c95ac1a93a8dfd5249b92e"></script> <script defer src="/assets/js/copy_code.js?12775fdf7f95e901d7119054556e495f" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?d9f17b6adc2311cbabd747f4538bb15f"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/js/mathjax-setup.js?a5bb4e6a542c546dd929b24b8b236dfd"></script> <script defer src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6" crossorigin="anonymous"></script> <script defer src="/assets/js/progress-bar.js?2f30e0e6801ea8f5036fa66e1ab0a71a" type="text/javascript"></script> <script src="/assets/js/vanilla-back-to-top.min.js?f40d453793ff4f64e238e420181a1d17"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/assets/js/search/ninja-keys.min.js?a3446f084dcaecc5f75aa1757d087dcf"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/js/search-setup.js?6c304f7b1992d4b60f7a07956e52f04a"></script> <script src="/assets/js/search-data.js"></script> <script src="/assets/js/shortcut-key.js?6f508d74becd347268a7f822bca7309d"></script> </body> </html>
