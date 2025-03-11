@@ -11,11 +11,11 @@ The Boltzmann policy normalizes the final Q values using a softmax function and 
 
 \\[P(a_i) = \frac{\exp(Q_{a_i})}{\sum_{a \in A} \exp(Q_a)}\\]
 
-An additional step is to use a temperature parameter $\tau$ to control the spread of the probabilities between actions.
+An additional step is to use a temperature parameter $$\tau$$ to control the spread of the probabilities between actions.
 
 \\[P(a_i) = \frac{\exp(Q_{a_i}/\tau)}{\sum_{a \in A}\exp(Q_a/\tau)}\\]
 
-In this notebook, I visualize the effect of different values of $\tau$ in a generated discrete distribution.
+In this notebook, I visualize the effect of different values of $$\tau$$ in a generated discrete distribution.
 
 ```python
 %matplotlib inline
@@ -27,7 +27,7 @@ import matplotlib.pyplot as plt
 mpl.style.use('grayscale')
 ```
 
-For this test, I'll generate a bunch of Q values from a normal distribution with $\mu=0$ and $\sigma=1$. I'll then use values of $\tau=\{0.1, 0.2, \ldots, 1\}$ to generate the final distributions.
+For this test, I'll generate a bunch of Q values from a normal distribution with $$\mu=0$$ and $$\sigma=1$$. I'll then use values of $$\tau=\{0.1, 0.2, \ldots, 1\}$$ to generate the final distributions.
 
 ```python
 qs=Normal(0, 1).sample((6,))

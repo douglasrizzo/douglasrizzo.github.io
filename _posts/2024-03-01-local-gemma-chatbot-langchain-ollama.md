@@ -49,7 +49,7 @@ It turns out the prompt templates, especially for Instruct models, need to use t
 
 I went after the correct templates on the Ollama website. They are shown below. Contrast with [my last post]({% post_url 2024-02-19-llm-qa-obsidian-rag %}#retrieval-qa-with-custom-prompt-template), in which I copied an internal prompt from LangChain, which was not suitable for any specific model.
 
-While tweaking the contents of the prompt template, I realized how much variability in the responses I got from only minor tweaks. For example, if I told Gemma something like *"if you don't know the answer, just say you don't know and not make anything up"*, the model would just refuse to answer any questions, even if the information was present in the retrieved text chunks. To make the comparison fair, I also removed the same section from the mistral prompt template, which I used in the [previous post]({% post_url 2024-02-19-llm-qa-obsidian-rag %}#retrieval-qa-with-custom-prompt-template).
+While tweaking the contents of the prompt template, I realized how much variability in the responses I got from only minor tweaks. For example, if I told Gemma something like _"if you don't know the answer, just say you don't know and not make anything up"_, the model would just refuse to answer any questions, even if the information was present in the retrieved text chunks. To make the comparison fair, I also removed the same section from the mistral prompt template, which I used in the [previous post]({% post_url 2024-02-19-llm-qa-obsidian-rag %}#retrieval-qa-with-custom-prompt-template).
 
 ### Mistral prompt template
 
@@ -90,7 +90,7 @@ Some final tweaking that made the output of both models better was using the fol
 - Chunk overlap: 50 characters
 - Chunks returned by similarity for [MMR](https://python.langchain.com/docs/modules/model_io/prompts/example_selector_types/mmr) search: 10
 - Final number of chunks returned by [MMR](https://python.langchain.com/docs/modules/model_io/prompts/example_selector_types/mmr): 6
-- [MMR](https://python.langchain.com/docs/modules/model_io/prompts/example_selector_types/mmr) $\lambda$ (0 = maximum diversity among chunks; 1 = no diversity): 0.7
+- [MMR](https://python.langchain.com/docs/modules/model_io/prompts/example_selector_types/mmr) $$\lambda$$ (0 = maximum diversity among chunks; 1 = no diversity): 0.7
 
 ## Running the models
 
@@ -131,7 +131,7 @@ Below, I asked the same questions to both Mistral-7b-it and Gemma-7b-it, giving 
 
 Analyzing the output qualitatively, I found that Mistral tends to give more informative and helpful answers. It also makes better use of the information in the chunks provided by the RAG procedure, creating richer answers, whereas Gemma tends to repeat itself or cut answers short when it hits a dead-end such as in the answer for [this question](#gemma-7b-1).
 
-Also, in [the first question](#gemma-7b), Gemma explained terms that may have been in the context chunks recovered for RAG (such as $a'$ and $\pi_*$), but they did not appear in its final answer, which would definitely confuse users in a conversation.
+Also, in [the first question](#gemma-7b), Gemma explained terms that may have been in the context chunks recovered for RAG (such as $$a'$$ and $$\pi_*$$), but they did not appear in its final answer, which would definitely confuse users in a conversation.
 
 ---
 
@@ -145,13 +145,13 @@ $$Q_{t+n}(S_t, A_t) \leftarrow Q_{t+n-1}(S_t, A_t) + \alpha [G_{t:t+n} - \gamma^
 
 This equation is a form of the Bellman equation for the action-value function. Let's break down its terms:
 
-- $Q_{t+n}$: The action-value function at time step $t+n$ for state-action pair $(S_t, A_t)$.
-- $\alpha$: The learning rate or step size, which determines how much new information is incorporated in each update.
-- $G_{t:t+n}$: The n-step return from time step t to time step $t+n$. It's the total reward obtained by following policy $\pi$ from state $S_t$ and taking action $A_t$, plus all the discounted future rewards, i.e., $G_{t:t+n} = R_{t+1:t+n}+ \gamma V_{\pi}(S_{t+n})$
-- $\gamma$: The discount factor, which is used to discount future rewards by a certain percentage to make them present values.
-- $Q_{t+n-1}$: The old estimate of the action-value function at time step $t+n-1$ for state-action pair $(S_t, A_t)$.
+- $$Q_{t+n}$$: The action-value function at time step $$t+n$$ for state-action pair $$(S_t, A_t)$$.
+- $$\alpha$$: The learning rate or step size, which determines how much new information is incorporated in each update.
+- $$G_{t:t+n}$$: The n-step return from time step t to time step $$t+n$$. It's the total reward obtained by following policy $$\pi$$ from state $$S_t$$ and taking action $$A_t$$, plus all the discounted future rewards, i.e., $$G_{t:t+n} = R_{t+1:t+n}+ \gamma V_{\pi}(S_{t+n})$$
+- $$\gamma$$: The discount factor, which is used to discount future rewards by a certain percentage to make them present values.
+- $$Q_{t+n-1}$$: The old estimate of the action-value function at time step $$t+n-1$$ for state-action pair $$(S_t, A_t)$$.
 
-This update rule aims to minimize the difference between the current and new estimates of $Q(S_t,A_t)$, gradually improving the estimation as more samples are collected.
+This update rule aims to minimize the difference between the current and new estimates of $$Q(S_t,A_t)$$, gradually improving the estimation as more samples are collected.
 
 #### Gemma-7b
 
@@ -161,13 +161,13 @@ $$Q_{t+n}(S_t, A_t) \doteq Q_{t+n-1}(S_t, A_t) + \alpha [G_{t:t+n} - \gamma^n Q_
 
 **Explanation of Terms:**
 
-- **$Q_{t+n}(S_t, A_t)$:** The action-value function at time $t+n$ for state $S_t$ and action $A_t$.
-- **$Q_{t+n-1}(S_t, A_t)$:** The action-value function at time $t+n-1$ for state $S_t$ and action $A_t$.
-- **$\alpha$:** The learning rate, which controls the rate of learning.
-- **$G_{t:t+n}$:** The n-step return, which is the total reward from time $t$ to time $t+n$.
-- **$\gamma$:** The discount factor, which accounts for the value of future rewards.
-- **$a'$:** The action that is not taken at time $t$.
-- **$\pi_*$:** The optimal policy.
+- **$$Q_{t+n}(S_t, A_t)$$:** The action-value function at time $$t+n$$ for state $$S_t$$ and action $$A_t$$.
+- **$$Q_{t+n-1}(S_t, A_t)$$:** The action-value function at time $$t+n-1$$ for state $$S_t$$ and action $$A_t$$.
+- **$$\alpha$$:** The learning rate, which controls the rate of learning.
+- **$$G_{t:t+n}$$:** The n-step return, which is the total reward from time $$t$$ to time $$t+n$$.
+- **$$\gamma$$:** The discount factor, which accounts for the value of future rewards.
+- **$$a'$$:** The action that is not taken at time $$t$$.
+- **$$\pi_*$$:** The optimal policy.
 
 **Note:** This equation is for the action-value function update in Q-learning, not the state-value function update.
 
@@ -177,7 +177,7 @@ $$Q_{t+n}(S_t, A_t) \doteq Q_{t+n-1}(S_t, A_t) + \alpha [G_{t:t+n} - \gamma^n Q_
 
 #### Mistral-7b
 
-The Deep Q-Network (DQN) architecture uses a deep neural network to approximate the Q* function in reinforce learning. The input to the network are 4 frames of 84x84 pixel screenshots from Atari 2600 games, only using the luminance values of the pixels. The network then uses three convolutional layers to learn visual representations of the game states. The output of the neural network is the Q values of all possible actions for each state, ranging from 4 to 18.
+The Deep Q-Network (DQN) architecture uses a deep neural network to approximate the Q\* function in reinforce learning. The input to the network are 4 frames of 84x84 pixel screenshots from Atari 2600 games, only using the luminance values of the pixels. The network then uses three convolutional layers to learn visual representations of the game states. The output of the neural network is the Q values of all possible actions for each state, ranging from 4 to 18.
 
 This architecture builds upon the Q-learning algorithm, which aims to find the optimal policy by iteratively improving the Q values based on observed state-action pairs and their corresponding rewards. However, directly applying this algorithm to deep neural networks with large input spaces is infeasible due to the computational demands.
 
@@ -187,7 +187,7 @@ These architectural enhancements allowed DQN to learn complex visual representat
 
 #### Gemma-7b
 
-The text describes the architecture of Deep Q-Networks, which uses a deep neural network to approximate the Q* function. The neural network has three convolution layers to learn visual representations of the game states.
+The text describes the architecture of Deep Q-Networks, which uses a deep neural network to approximate the Q\* function. The neural network has three convolution layers to learn visual representations of the game states.
 
 The text does not describe the architecture of the convolutional layers, therefore I cannot answer the question.
 

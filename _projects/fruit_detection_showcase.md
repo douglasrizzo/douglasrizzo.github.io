@@ -2,7 +2,7 @@
 layout: page
 title: fruit detection showcase
 description: training convolutional neural networks do detect oranges
-# img: assets/img/12.jpg
+img: assets/img/12.jpg
 importance: 2
 tags: convnets object-detection pytorch wandb
 category: computer vision

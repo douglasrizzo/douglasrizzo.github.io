@@ -303,9 +303,9 @@ A saída da rede é um conjunto de 3 valores para cada vetor de entrada. Cada um
 
 A função de ativação na última camada da rede neural dita a natureza dos valores de saída:
 
-* `tanh` : tangente hiperbólica (intervalo $[-1; 1]$).
-* `sigmoid` : sigmoide (intervalo $[0; 1]$).
-* `softmax` : _softmax_ (intervalo $[0; 1]$, a soma dos valores preditos para cada dado de entrada deve ser igual a 1).
+* `tanh` : tangente hiperbólica (intervalo $$[-1; 1]$$).
+* `sigmoid` : sigmoide (intervalo $$[0; 1]$$).
+* `softmax` : _softmax_ (intervalo $$[0; 1]$$, a soma dos valores preditos para cada dado de entrada deve ser igual a 1).
 
 Para transformar os valores exibidos acima nas classes preditas, escolhemos a maior saída no eixo das classes.
 

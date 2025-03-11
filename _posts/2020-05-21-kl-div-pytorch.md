@@ -11,7 +11,7 @@ In this notebook, I try to understand how the KL divergence works, specifically 
 
 Relevant docs are here: https://pytorch.org/docs/stable/nn.html#torch.nn.KLDivLoss
 
-Basically, given an $N \times \ast $ tensor `x`, where $\ast$ represents any number of dimensions besides the first one, the first dimension of `x` will hold $N$ tensors. Each one of these tensors symbolizes a (discrete) probability distribution. This means that each of the tensors must sum to 1 (`x.sum(0) = [1.0 ,1.0 ,1.0 ,...]`).
+Basically, given an $$N \times \ast $$ tensor `x`, where $$\ast$$ represents any number of dimensions besides the first one, the first dimension of `x` will hold $$N$$ tensors. Each one of these tensors symbolizes a (discrete) probability distribution. This means that each of the tensors must sum to 1 (`x.sum(0) = [1.0 ,1.0 ,1.0 ,...]`).
 
 An easy way to do that to the output of a neural network is to use the softmax function. Another is to divide each value inside the tensor by the sum of all values.
 

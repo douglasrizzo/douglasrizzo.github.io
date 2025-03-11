@@ -92,7 +92,7 @@ Or, if you want to get fancy:
 ``` sh
 for i in $(seq 1 5); do
   for j in $(seq 1 4); do
-    ts python train.py --network $i --dataset $j
+    ts python train.py --network $$i --dataset $$j
   done
 done
 ```

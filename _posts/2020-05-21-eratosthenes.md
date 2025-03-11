@@ -9,7 +9,7 @@ categories: coding
 
 In this notebook, I implement a few versions of the [sieve of Eratosthenes](https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes) for finding prime numbers.
 
-Starting from $n=2$ and given the set $P$ of prime numbers up until $n-1$, we check if $n$ is divisible by any $p \in P$. If not, $P \leftarrow P + \\\{n\\\}$.
+Starting from $$n=2$$ and given the set $$P$$ of prime numbers up until $$n-1$$, we check if $$n$$ is divisible by any $$p \in P$$. If not, $$P \leftarrow P + \\\{n\\\}$$.
 
 ```python
 from math import sqrt

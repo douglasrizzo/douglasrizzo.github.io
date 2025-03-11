@@ -27,16 +27,16 @@ On the road to building this Q&A bot, we will be introduced to many concepts:
 
 So that no one gets lost, the following diagram explains how the whole pipeline to get to our final Q&A bot (and how this notebook) works:
 
-![My happy picture](/assets/img/langsidian.png)
+<img src="/assets/img/langsidian.png" alt="My happy picture" style="width: 100%;">
 
 ## Prerequisites
 
 1. You can find the environment.yml file to create a conda env with the necessary dependencies to run the notebook.
 2. You should download a model from the GPT4All website and save it on `./models/my_little_llm.gguf`. The one below is the one I used.
 
-    ```sh
-    wget https://gpt4all.io/models/gguf/mistral-7b-openorca.Q4_0.gguf -O models/my_little_llm.gguf
-    ```
+   ```sh
+   wget https://gpt4all.io/models/gguf/mistral-7b-openorca.Q4_0.gguf -O models/my_little_llm.gguf
+   ```
 
 ## Loading documents
 
@@ -125,7 +125,7 @@ Let's take a peek at a chunk. They inherit the metadata of their parent document
 splits[542]
 ```
 
-    Document(page_content='# epsilon-soft policies\n\nAn $\\epsilon$-soft policy is a stochastic policy that always assigns a non-zero $\\frac{\\epsilon}{|A|}$ probability to all actions. These policies always perform some exploration.\n\nThe uniform random policy is an $\\epsilon$-soft policy. The epsilon-greedy policy also is.', metadata={'source': 'epsilon-soft policies.md', 'path': '/home/dodo/Documents/Obsidian/epsilon-soft policies.md', 'created': 1680669506.8282943, 'last_modified': 1680669506.8282943, 'last_accessed': 1708267660.780534, 'tags': 'area/ai/rl project/rl-spec', 'aliases': 'epsilon-soft policy', 'date': '2021-05-24 18:32'})
+    Document(page_content='# epsilon-soft policies\n\nAn $$\\epsilon$$-soft policy is a stochastic policy that always assigns a non-zero $$\\frac{\\epsilon}{|A|}$$ probability to all actions. These policies always perform some exploration.\n\nThe uniform random policy is an $$\\epsilon$$-soft policy. The epsilon-greedy policy also is.', metadata={'source': 'epsilon-soft policies.md', 'path': '/home/dodo/Documents/Obsidian/epsilon-soft policies.md', 'created': 1680669506.8282943, 'last_modified': 1680669506.8282943, 'last_accessed': 1708267660.780534, 'tags': 'area/ai/rl project/rl-spec', 'aliases': 'epsilon-soft policy', 'date': '2021-05-24 18:32'})
 
 ## Computing embeddings and saving them to a vector store
 
@@ -145,7 +145,7 @@ embedding = HuggingFaceEmbeddings()
     /home/dodo/.anaconda3/envs/langsidian/lib/python3.12/site-packages/tqdm/auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
       from .autonotebook import tqdm as notebook_tqdm
 
-Computed embedding vectors can be stored in *vector stores*. The one we will use in this project is [Chroma](https://docs.trychroma.com/). It is free, runs locally and is perfect for our small document base.
+Computed embedding vectors can be stored in _vector stores_. The one we will use in this project is [Chroma](https://docs.trychroma.com/). It is free, runs locally and is perfect for our small document base.
 
 ```python
 # !pip install chromadb
@@ -177,7 +177,7 @@ The question below will be used as a test for everything else below in the noteb
 question = "What is the definition of the action value function?"
 ```
 
-The first example of retrieval is *similarity search*, which will convert the prompt into an embedding vector and compute the cosine similarity between the prompt embedding and the embeddings of all chunks in the vector store, returning the *k* most similar chunks.
+The first example of retrieval is _similarity search_, which will convert the prompt into an embedding vector and compute the cosine similarity between the prompt embedding and the embeddings of all chunks in the vector store, returning the _k_ most similar chunks.
 
 ```python
 retrieved_docs = vectordb.similarity_search(question, k=8)
@@ -186,67 +186,67 @@ for doc in retrieved_docs:
 ```
 
     The action-value function represents the expected return from a given state after taking a specific action and later following a specific policy.
-    
+
     $$q_{\pi}(s,a)=\mathbb{E}_{\pi}[G_t|S_t=s,A_t=a]$$
-    
-    where $G_t$ is the Expected sum of future rewards.
-    
+
+    where $$G_t$$ is the Expected sum of future rewards.
+
     ---
-    
+
     A value function maps states, or state-action pairs, to expected returns.
-    
+
     - State-value function
     - Action-value function
-    
+
     ---
-    
+
     The state-value function represents the expected return from a given state, possibly under a given policy.
-    
+
     $$v(s)=\mathbb{E}[G_t|S_t=s]$$
     $$v_{\pi}(s)=\mathbb{E}_{\pi}[G_t|S_t=s]$$
-    
-    where $G_t$ is the Expected sum of future rewards.
-    
+
+    where $$G_t$$ is the Expected sum of future rewards.
+
     ---
-    
+
     The same goes for the Action-value function.
-    
+
     $$\begin{align}
     q_*(s,a) & = \sum_{s'}\sum_r p(s',r|s,a)[r + \gamma \sum_{a'} \pi_*(a'|s') q_*(s',a')] \\
            & = \sum_{s'}\sum_r p(s',r|s,a)[r + \gamma \max_{a'} q_*(s',a')]
     \end{align}$$
-    
+
     ---
-    
-    Let's say we have a policy $\pi_1$ that has a value function $v_{\pi_1}$. If we use $v_{\pi_1}$ to evaluate states but, instead of following $\pi_1$, we actually always select the actions that will take us to the future state $s'$ with highest $v_{\pi_1}(s')$, we will end up with a policy $\pi_2$ that is equal to or better than $\pi_1$.
-    
+
+    Let's say we have a policy $$\pi_1$$ that has a value function $$v_{\pi_1}$$. If we use $$v_{\pi_1}$$ to evaluate states but, instead of following $$\pi_1$$, we actually always select the actions that will take us to the future state $$s'$$ with highest $$v_{\pi_1}(s')$$, we will end up with a policy $$\pi_2$$ that is equal to or better than $$\pi_1$$.
+
     ---
-    
+
     $$\begin{align}
     v_*(s) & = \sum_a \pi_*(a|s) & \sum_{s'}\sum_r p(s',r|s,a)[r + \gamma v_*(s')] \\
            & = \max_a & \sum_{s'}\sum_r p(s',r|s,a)[r + \gamma v_*(s')]
     \end{align}$$
-    where $\pi_*$ is the Optimal policy.
-    
+    where $$\pi_*$$ is the Optimal policy.
+
     The same goes for the Action-value function.
-    
+
     ---
-    
-    It's a function that dictates the probability the state will find itself in an arbitrary state $s'$ and the agent will receive reward $r$, given the current state the environment finds itself in, $s$, and the action chosen by the agent in $s$, depicted as $a$. It is usually denoted as $p(s',r|s,a)$.
-    
+
+    It's a function that dictates the probability the state will find itself in an arbitrary state $$s'$$ and the agent will receive reward $$r$$, given the current state the environment finds itself in, $$s$$, and the action chosen by the agent in $$s$$, depicted as $$a$$. It is usually denoted as $$p(s',r|s,a)$$.
+
     Some properties of this function:
-    
+
     ---
-    
-    Policy evaluation is the task of finding the state-value function $v_{\pi}$, given the policy $\pi$. ^1b9b46
-    
+
+    Policy evaluation is the task of finding the state-value function $$v_{\pi}$$, given the policy $$\pi$$. ^1b9b46
+
     ---
 
 #### Maximal marginal relevance search
 
 Plain similarity search has a drawback. It tends to recover chunks which are very similar or even identical, diminishing the overall amount of information present in the retrieved chunks.
 
-To solve this, LangChain provides a method called maximal marginal relevance search, which works by *"[...] finding the examples with the embeddings that have the greatest cosine similarity with the inputs, and then iteratively adding them while penalizing them for closeness to already selected examples."* [[source]](https://python.langchain.com/docs/modules/model_io/prompts/example_selector_types/mmr)
+To solve this, LangChain provides a method called maximal marginal relevance search, which works by _"[...] finding the examples with the embeddings that have the greatest cosine similarity with the inputs, and then iteratively adding them while penalizing them for closeness to already selected examples."_ [[source]](https://python.langchain.com/docs/modules/model_io/prompts/example_selector_types/mmr)
 
 ```python
 retrieved_docs = vectordb.max_marginal_relevance_search(question, k=8)
@@ -255,48 +255,48 @@ for doc in retrieved_docs:
 ```
 
     The action-value function represents the expected return from a given state after taking a specific action and later following a specific policy.
-    
+
     $$q_{\pi}(s,a)=\mathbb{E}_{\pi}[G_t|S_t=s,A_t=a]$$
-    
-    where $G_t$ is the Expected sum of future rewards.
+
+    where $$G_t$$ is the Expected sum of future rewards.
     ---
     A value function maps states, or state-action pairs, to expected returns.
-    
+
     - State-value function
     - Action-value function
     ---
     A generalization of Sarsa which employs the n-step return for the action value function,
-    
+
     !n-step return#^205a30 ^68659e
-    
-    This estimate is then used in the following update rule for the action-value of the state-action pair at time $t$.
-    
+
+    This estimate is then used in the following update rule for the action-value of the state-action pair at time $$t$$.
+
     $$Q_{t+n}(S_t, A_t) \doteq Q_{t+n-1}(S_t, A_t) + \alpha [G_{t:t+n} - \gamma^n Q_{t+n-1}(S_t, A_t)]$$ ^ca04db
     ---
     - if the agent exploits without having a good estimate of the action-value function, it will most likely be locked in suboptimal behavior, not being able to gather information from unknown transitions which might bring it more return.
     ---
     Some properties of this function:
-    
+
     It maps states and actions to states and rewards, so its cardinality is $$p:S \times R \times S \times A \to [0;1]$$
-    
+
     It is a probability, so the sum over all possible combinations of states and rewards must be one,
     $$\sum_{s' \in S} \sum_{r \in R} p(s',r|s,a) = 1, \forall s \in S, a \in A(s)$$
     ---
     # Factored value functions in cooperative multi-agent reinforcement learning
-    
+
     <iframe width="560" height="315" src="https://www.youtube.com/embed/W_9kcQmaWjo?start=684" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    
+
     VDN was the first one and the one I used in my Doctorate.
     ---
     - Exploitation: select the greedy action with relation to the action-value function.
     - Exploration: select a non-greedy action.
     ---
     Given the following MDP:
-    
+
     !Pasted image 20210523192818.png
-    
+
     The Bellman equation allows the value function to be expressed and solved as a system of linear equations: ^c06dd9
-    
+
     !Bellman equation for the state-value function#^a65ad4
     ---
 
@@ -326,7 +326,7 @@ llm = GPT4All(model="models/my_little_llm.gguf", device="gpu")
 
 #### Self-query retrieval
 
-Self-query is a technique in which an LLM is specifically prompted to output a *structured query*. It also allows it to take document/chunk metadata into consideration, as long as we describe each attribute in the metadata with a textual description.
+Self-query is a technique in which an LLM is specifically prompted to output a _structured query_. It also allows it to take document/chunk metadata into consideration, as long as we describe each attribute in the metadata with a textual description.
 
 Under the hood, self-query performs some pretty convoluted modifications to the original prompt and I advise you look at the documentation to understand what's going on. [[Source]](https://python.langchain.com/docs/modules/data_connection/retrievers/self_query#constructing-from-scratch-with-lcel)
 
@@ -392,11 +392,11 @@ As we can see, without more informative metadata (or better preprocessing of the
 
 ### Contextual compression retrieval
 
-As a final test on retrieval, we will implement a *"contextual compression retriever"*.
+As a final test on retrieval, we will implement a _"contextual compression retriever"_.
 
 From the [LangChain documentation](https://python.langchain.com/docs/modules/data_connection/retrievers/contextual_compression):
 
->The Contextual Compression Retriever passes queries to the base retriever, takes the initial documents and passes them through the Document Compressor. The Document Compressor takes a list of documents and shortens it by reducing the contents of documents or dropping documents altogether.
+> The Contextual Compression Retriever passes queries to the base retriever, takes the initial documents and passes them through the Document Compressor. The Document Compressor takes a list of documents and shortens it by reducing the contents of documents or dropping documents altogether.
 
 In our case:
 
@@ -452,7 +452,7 @@ To summarize what we already have for this step:
 
 ### Plain retrieval Q&A
 
-This method of Q&A uses the prompt to find relevant chunks in the vector store. These chunks are called the *context* of the prompt and they are concatenated to the prompt, which is then passed directly to the LLM.
+This method of Q&A uses the prompt to find relevant chunks in the vector store. These chunks are called the _context_ of the prompt and they are concatenated to the prompt, which is then passed directly to the LLM.
 
 ```python
 from langchain.chains import RetrievalQA
@@ -546,32 +546,32 @@ for q in questions:
 
 **Question: Given me the equation for the action value function update.**
 
- Answer:  The equation for the action-value function update is given by:
+Answer: The equation for the action-value function update is given by:
 
 $$q_{\pi}(s,a) = R(s,a) + \<dummy32001>{ \gamma V_\pi (s') | s' \in S'} $$
 
-where $R(s,a)$ is the reward received when taking action a in state s and $\gamma$ is the discount factor.
+where $$R(s,a)$$ is the reward received when taking action a in state s and $$\gamma$$ is the discount factor.
 
 **Question: What is the overall architecture of the Deep Q-Networks?**
 
- Answer:  The overall architecture of a Deep Q-Network (DQN) consists of an input layer, multiple hidden layers with nonlinear activation functions, and an output layer. It uses experience replay to store past experiences for training purposes, and employs target networks to stabilize the learning process.
+Answer: The overall architecture of a Deep Q-Network (DQN) consists of an input layer, multiple hidden layers with nonlinear activation functions, and an output layer. It uses experience replay to store past experiences for training purposes, and employs target networks to stabilize the learning process.
 over and out
 
 **Question: What is the difference between causal language modelling and masked language modelling?**
 
- Answer:  Causal language modeling refers to a method where the model predicts the next token in a sequence based on the previous tokens. In contrast, masked language modeling involves randomly masking some tokens during training time and then trains the model to reconstruct the original text by predicting the masked tokens.
+Answer: Causal language modeling refers to a method where the model predicts the next token in a sequence based on the previous tokens. In contrast, masked language modeling involves randomly masking some tokens during training time and then trains the model to reconstruct the original text by predicting the masked tokens.
 
 **Question: What is zero-shot learning?**
 
- Answer:  Zero-shot learning refers to a model's ability to perform new tasks without being explicitly trained on those specific tasks or examples. In the context of large language models, it means that an AI can execute new tasks without needing any explicit training data for those tasks.
+Answer: Zero-shot learning refers to a model's ability to perform new tasks without being explicitly trained on those specific tasks or examples. In the context of large language models, it means that an AI can execute new tasks without needing any explicit training data for those tasks.
 
 **Question: Explain to me the concept of bucketing in RNNs.**
 
- Answer:  Bucketing in RNNs refers to grouping or organizing input sequences into fixed-sized groups, called "buckets", before processing them with an RNN model. This technique helps improve training efficiency and reduce padding by ensuring that each bucket contains a sufficient amount of randomness and variability while preventing it from being too large so as not to introduce excessive padding.
+Answer: Bucketing in RNNs refers to grouping or organizing input sequences into fixed-sized groups, called "buckets", before processing them with an RNN model. This technique helps improve training efficiency and reduce padding by ensuring that each bucket contains a sufficient amount of randomness and variability while preventing it from being too large so as not to introduce excessive padding.
 
 **Question: What is a named entity in the concept of NLP?**
 
- Answer:  In the context of Natural Language Processing (NLP), a named entity refers to a real-world object that can be denoted with a proper name. Examples are a person, location, organization, product. It can be abstract or have a physical existence.
+Answer: In the context of Natural Language Processing (NLP), a named entity refers to a real-world object that can be denoted with a proper name. Examples are a person, location, organization, product. It can be abstract or have a physical existence.
 
 In some answers, the model has actually followed the instructions from the new prompt, but we need a much more powerful LLM, or the employment of techniques such as few-shot learning, to get better instruction-following results.
 

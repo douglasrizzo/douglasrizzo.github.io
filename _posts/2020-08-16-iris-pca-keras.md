@@ -86,7 +86,7 @@ def do_everything(X, y):
 
 # Análise de componentes principais
 
-A análise de componentes principais (PCA, do inglês *principal component analysis*) é uma técnica matemática que detecta correlações nas colunas de uma matriz $X$ e realiza uma transformação linear em $X$ de forma a reduzir tais correlações.
+A análise de componentes principais (PCA, do inglês *principal component analysis*) é uma técnica matemática que detecta correlações nas colunas de uma matriz $$X$$ e realiza uma transformação linear em $$X$$ de forma a reduzir tais correlações.
 
 Em linhas gerais, dados altamente correlacionadas são pouco informativos, inclusive para o treinamento de um classificador. Considere uma base de dados  hipotética de cidades que possui as seguintes informações para cada cidade:
 
