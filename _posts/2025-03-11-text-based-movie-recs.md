@@ -9,6 +9,8 @@ mermaid:
   zoomable: false
 ---
 
+## Introduction
+
 In this project, we will implement a text-based recommendation system for movies.
 
 The idea is that our recommendation engine provide a user with recommendations of new movies based on how similar the title of a movie the user has already watched is to the the titles of other movies in the database.
@@ -16,6 +18,10 @@ The idea is that our recommendation engine provide a user with recommendations o
 We will implement two different ways of making a movie recommendation system and one way of making a movie reranking system, based solely on the title and overview of a movie a hypothetical user might enjoy. The techniques we will employ are TF-IDF and bi-encoders. The movie reranker wil be implemented using a cross-encoder.
 
 ## Resources
+
+- Open this page in Google Colab [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/douglasrizzo/recsys-movies/blob/master/src/text-based-movie-recs.ipynb)
+- View the GitHub repo [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/douglasrizzo/recsys-movies/blob/master/src/text-based-movie-recs.ipynb)
+- [Read the contents in my website](https://douglasrizzo.com.br/blog/2025/03/text-based-movie-recs/)
 
 The following links instructed me on how to access a movie dataset and which libraries to use, especially the part on TF-IDF which inspired me to implement the other methods. You can check them out for more examples.
 
@@ -49,7 +55,7 @@ tmdb_path = next(
 
 You can see in the cells below a sample of the data we will use. At the time of this project, there were over 940,000 movies available on the dataset.
 
-We are only intetrested in the title and overview of the movies, so we will drop the other columns.
+We are only interested in the title and overview of the movies, so we will drop the other columns.
 
 ```python
 movie_metadata = pd.read_csv(tmdb_path, index_col="id")
@@ -192,7 +198,7 @@ $$ tfidf(t, d, D) = tf(t, d) \cdot idf(t,D) $$
 
 ### Implementing the recommendation engine
 
-For this exercise, we will use scikit-learn to compute the $$tfidf$$ values of all words in all 10,1000 titles of our movies. This will generate a $$ \mid T \mid \times \mid D \mid $$ matrix whose size you can see below.
+For this exercise, we will use scikit-learn to compute the $$tfidf$$ values of all words in all 10,000 titles of our movies. This will generate a $$ \mid T \mid \times \mid D \mid $$ matrix whose size you can see below.
 
 ```python
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -206,7 +212,7 @@ print(tfidf_matrix.shape)
 
 ### Computing similarities
 
-In our example, each document $$d$$ is a single movie title and the corresponding vector in the tfidf matrix can be considered a numerical feature vector representing the movie title. We can compute how similar these feature vectorsamongst each other by using similarity metrics such as the [cosine similarity](https://en.wikipedia.org/wiki/Cosine_similarity), which we will employ below.
+In our example, each document $$d$$ is a single movie title and the corresponding vector in the TF-IDF matrix can be considered a numerical feature vector representing the movie title. We can compute how similar these feature vectorsamongst each other by using similarity metrics such as the [cosine similarity](https://en.wikipedia.org/wiki/Cosine_similarity), which we will employ below.
 
 ```python
 cosine_sim = (tfidf_matrix * tfidf_matrix.T).toarray()
@@ -453,7 +459,7 @@ graph BT
   concat --> BERT --> Classifier --> Output@{shape: circle, label: "[0; 1]"}
 ```
 
-Due to their high computational complexity and usually better results than bi-=encoders, cross-encoders are usually used in the re-ranking step of recommendation systems, in which a subset of recommendations has already been selected by previous, more lightweight methods.
+Due to their high computational complexity and usually better results than bi-encoders, cross-encoders are usually used in the re-ranking step of recommendation systems, in which a subset of recommendations has already been selected by previous, more lightweight methods.
 
 **Advantages of cross-encoders**
 
