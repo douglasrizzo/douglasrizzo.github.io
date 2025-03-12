@@ -32,7 +32,7 @@ The following links instructed me on how to access a movie dataset and which lib
 
 ## Downloading the dataset
 
-For this exercise, we will use The Movie Database (TMDb), a dataset containing movies and their features. It does not contain user-related information, such as how many people watched a movie or movie ratings. We will use [a version provided by Kaggle user asaniczka](https://www.kaggle.com/datasets/asaniczka/tmdb-movies-dataset-2023-930k-movies), which is constantly updated.
+For this exercise, we will use The Movies Database (TMDb), a dataset containing movies and their features. It does not contain user-related information, such as how many people watched a movie or movie ratings. We will use [a version provided by Kaggle user asaniczka](https://www.kaggle.com/datasets/asaniczka/tmdb-movies-dataset-2023-930k-movies), which is constantly updated.
 
 To download it, we will use the Python package `kagglehub`.
 
@@ -134,12 +134,12 @@ movie_metadata = movie_metadata.sample(n=10000, random_state=42).sort_index()
 
 ## Title-based recommendations using TF-IDF
 
-The first technique we will implement is term frequency-inverse document frequency, or TF-IDF for short. It is an information retrieval technique in which a term $$t_1$$ inside a document $$d_1$$ is given a weight based on how frequently it appears in that document, compared to how frequently it appears in all other documents of our corpus. The intuitition is that:
+The first technique we will implement is term frequency-inverse document frequency, or TF-IDF for short. It is an information retrieval technique in which a term $$t$$ inside a document $$d$$ is given a weight based on how frequently it appears in that document, compared to how frequently it appears in all other documents of our corpus. The intuitition is that:
 
-- if $$t_1$$ is very common in $$d_1$$, it might be relevant to the context of $$d_1$$. This value is called the **term frequency**.
-- if $$t_1$$ does not appear as frequently in other documents, it might be very specific to the context of $$d_1$$ _in particular_, so it might be very relevant. This term is called the **inverse document frequency**.
+- if $$t$$ is very common in $$d$$, it might be relevant to the context of $$d$$. This value is called the **term frequency**.
+- if $$t$$ does not appear as frequently in other documents, it might be very specific to the context of $$d$$ _in particular_, so it might be very relevant. This term is called the **inverse document frequency**.
 
-However, if $$t_1$$ also appears very frequently in other documents, it might not be a very informative term. Think about the word _"the"_, which may appear very frequently in a single document, but we can also find it in many other documents of a corpus.
+However, if $$t$$ also appears very frequently in other documents, it might not be a very informative term. Think about the word _"the"_, which may appear very frequently in a single document, but we can also find it in many other documents of a corpus.
 
 ### Term frequency
 
@@ -192,7 +192,7 @@ Finally, we can compute the $$tfidf$$ value for a term $$t$$ inside a document $
 
 $$ tfidf(t, d, D) = tf(t, d) \cdot idf(t,D) $$
 
-### Interpreting $$tfidf$$
+### Interpreting TF-IDF
 
 - If the relative frequency of $$t$$ inside $$d$$ is high, then $$tf(t, d)$$ will be high
 - If $$t$$'s frequency inside all other documents in $$D$$ is small, them $$idf(t, D)$$ will be high
