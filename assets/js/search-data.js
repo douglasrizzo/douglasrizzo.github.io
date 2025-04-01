@@ -44,7 +44,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/cv/";
           },
-        },{id: "post-building-text-based-movie-recommendation-systems-using-the-tmdb-dataset",
+        },{id: "post-building-a-content-based-movie-recommendation-system-using-the-movielens-dataset",
+      
+        title: "Building a content-based movie recommendation system using the MovieLens dataset",
+      
+      description: "",
+      section: "Posts",
+      handler: () => {
+        
+          window.location.href = "/blog/2025/03/content-based-filtering/";
+        
+      },
+    },{id: "post-building-text-based-movie-recommendation-systems-using-the-tmdb-dataset",
       
         title: "Building text-based movie recommendation systems using the TMDB dataset",
       
