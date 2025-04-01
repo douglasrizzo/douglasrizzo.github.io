@@ -56,6 +56,26 @@ table.table a {
   }
 }
 
+table.post-body {
+  margin: 3rem auto;
+  /* Center the table and add space before and after */
+  border-collapse: separate;
+  /* Ensure separation between rows */
+  border-spacing: 0 0.5rem;
+  /* Add spacing between rows */
+  display: block;
+  overflow: auto;
+  white-space: nowrap;
+
+  tr:nth-child(odd) {
+    background-color: var(--global-row-odd-bg-color);
+  }
+
+  tr:nth-child(even) {
+    background-color: var(--global-row-even-bg-color);
+  }
+}
+
 blockquote {
   background: var(--global-bg-color);
   border-left: 5px solid var(--global-theme-color);
