@@ -19,9 +19,9 @@ The idea is that our recommendation engine provide a user with recommendations o
 
 We will implement two different ways of making a movie recommendation system and one way of making a movie reranking system, based solely on the title and overview of a movie a hypothetical user might enjoy. The techniques we will employ are TF-IDF and bi-encoders. The movie reranker wil be implemented using a cross-encoder.
 
-## Resources
+### Resources
 
-- GitHub repository containing this project and a list of dependencies [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/douglasrizzo/recsys-movies/blob/master/src/text-based-movie-recs.ipynb).
+- GitHub repository containing this project and a list of dependencies [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/douglasrizzo/recsys-movies/blob/master/src/text-based-movie-recs.ipynb)
 - Open this page in Google Colab [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/douglasrizzo/recsys-movies/blob/master/src/text-based-movie-recs.ipynb)
 - [Read the contents in my website](https://douglasrizzo.com.br/blog/2025/03/text-based-movie-recs/)
 
@@ -83,7 +83,7 @@ movie_metadata.head()
     }
 
 </style>
-<table border="1" class="dataframe">
+<table class="post-body">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -393,7 +393,7 @@ from sentence_transformers import SentenceTransformer
 model = SentenceTransformer("all-MiniLM-L6-v2")
 ```
 
-The model is applied to the movie titles concatenated with their overviews and generate fixed-size embedding vectors of size 384. The output is a matrix of size $$ \mid D \mid  \times n$$, where $$n$$ is the dimension of the embedding vector.
+The model is applied to the movie titles concatenated with their overviews and generate fixed-size embedding vectors of size 384. The output is a matrix of size $$ \mid D \mid \times n$$, where $$n$$ is the dimension of the embedding vector.
 
 ```python
 embeddings = model.encode(
