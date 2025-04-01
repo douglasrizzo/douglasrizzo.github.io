@@ -141,22 +141,7 @@ movies = pd.read_csv(mvls_movies_path).set_index("movieId").sort_index()
 movies.head()
 ```
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-
-</style>
-<table class="post-body">
+<table>
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -197,7 +182,6 @@ movies.head()
     </tr>
   </tbody>
 </table>
-</div>
 
 The first thing we will do is represent movie genres by one-hot encoded columns. We will also keep a record of the names of these columns for later.
 
@@ -215,21 +199,7 @@ movies.head()
     Number of genres: 20
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-
-</style>
-<table class="post-body">
+<table>
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -445,21 +415,7 @@ user_ratings.head()
 ```
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-
-</style>
-<table class="post-body">
+<table>
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -521,21 +477,7 @@ user_ratings.head()
 ```
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-
-</style>
-<table class="post-body">
+<table>
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -697,21 +639,7 @@ user_ratings.head()
 ```
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-
-</style>
-<table class="post-body">
+<table>
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -874,21 +802,7 @@ user_genre_preferences.sort_values("Sum of ratings", ascending=False)
 ```
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-
-</style>
-<table class="post-body">
+<table>
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -1011,21 +925,7 @@ user_genre_preferences.sort_values("Normalized sum of ratings", ascending=False)
 ```
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-
-</style>
-<table class="post-body">
+<table>
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -1194,21 +1094,7 @@ user_genre_preferences.corr()
 ```
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-
-</style>
-<table class="post-body">
+<table>
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -1251,21 +1137,7 @@ user_genre_preferences
 ```
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-
-</style>
-<table class="post-body">
+<table>
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -1427,21 +1299,7 @@ user_genre_preferences[["Normalized sum of ratings", "Normalized by movies in ge
 ```
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-
-</style>
-<table class="post-body">
+<table>
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -1491,21 +1349,7 @@ unwatched_movies
 ```
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-
-</style>
-<table class="post-body">
+<table>
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -1834,21 +1678,7 @@ movie_genre_ratings
 ```
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-
-</style>
-<table class="post-body">
+<table>
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -2169,21 +1999,7 @@ unwatched_movies[["title", "content_based_rating"]].sort_values("content_based_r
 ```
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-
-</style>
-<table class="post-body">
+<table>
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -2269,21 +2085,7 @@ unwatched_movies[["title", "content_based_rating2"]].sort_values("content_based_
 ```
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-
-</style>
-<table class="post-body">
+<table>
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -2455,21 +2257,7 @@ possible_ratings
 ```
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-
-</style>
-<table class="post-body">
+<table>
   <thead>
     <tr style="text-align: right;">
       <th></th>
