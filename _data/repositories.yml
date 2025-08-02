@@ -1,14 +1,16 @@
 github_users:
-  - torvalds
-  - alshedivat
+  - douglasrizzo
 
 repo_description_lines_max: 2
 
 github_repos:
-  - alshedivat/al-folio
-  - jekyll/jekyll
-  - twbs/bootstrap
-  - jquery/jquery
-  - FortAwesome/Font-Awesome
-  - mathjax/MathJax
-  - jpswalsh/academicons
+  - douglasrizzo/catsim
+  - douglasrizzo/pydunn
+  - douglasrizzo/dodo_detector_ros
+  - douglasrizzo/Classe-Latex-FEI
+  - douglasrizzo/mygan
+  - douglasrizzo/brnames
+  - douglasrizzo/matrix
+  - douglasrizzo/machine_learning
+  - douglasrizzo/numerical_analysis
+  - douglasrizzo/search
